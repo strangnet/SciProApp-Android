@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+	android:id="@+id/main_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="@color/su_water_1"
     >
 <TextView  
     android:text="@string/hello"
-    android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content" 
+    android:layout_gravity="center" 
+    android:textStyle="bold"
+    android:textSize="24px"
+    android:textColor="@color/black" />
+<Button 
+	android:text="@string/switch_color" 
+	android:id="@+id/switch_button" 
+	android:layout_height="wrap_content" 
+	android:layout_width="wrap_content" 
+	android:layout_marginTop="5px" />
 </LinearLayout>
