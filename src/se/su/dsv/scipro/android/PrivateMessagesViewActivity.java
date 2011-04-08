@@ -6,12 +6,16 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class PrivateMessagesViewActivity extends ListActivity {
 
     private static final int SHOW_MESSAGE = 1;
+    private static final int NEW_MESSAGE = 2;
     private MessageListAdapter adapter;
+    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,15 @@ public class PrivateMessagesViewActivity extends ListActivity {
     }
 
     private void setUpViews() {
+        submitButton = (Button) findViewById(R.id.new_message_button);
         
+        submitButton.setOnClickListener(new OnClickListener() {
+            
+            public void onClick(View v) {
+                Intent intent = new Intent(PrivateMessagesViewActivity.this, NewMessageActivity.class);
+                startActivityForResult(intent, NEW_MESSAGE);
+            }
+        });
     }
     
     

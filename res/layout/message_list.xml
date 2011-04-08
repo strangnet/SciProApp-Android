@@ -24,5 +24,11 @@
 		android:text="No messages"
 		android:gravity="center_vertical|center_horizontal"
 		android:layout_below="@id/messages_title" />
-	
+	<Button 
+		android:text="New Message" 
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" 
+		android:id="@+id/new_message_button" 
+		android:layout_alignParentBottom="true" />
+		
 </RelativeLayout>

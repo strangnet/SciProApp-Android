@@ -22,7 +22,7 @@ public class DummyData {
         return instance;
     }
     
-    public DummyData() {
+    private DummyData() {
         addUsers();
         addProjects();
         addMessages();
