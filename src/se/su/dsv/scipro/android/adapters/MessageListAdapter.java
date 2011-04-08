@@ -2,7 +2,9 @@ package se.su.dsv.scipro.android.adapters;
 
 import java.util.ArrayList;
 
+import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.PrivateMessage;
+import se.su.dsv.scipro.android.views.MessageListItem;
 
 import android.content.Context;
 import android.view.View;
@@ -33,7 +35,14 @@ public class MessageListAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        MessageListItem mli;
+        if (convertView == null) {
+            mli = (MessageListItem) View.inflate(context, R.layout.message_list_item, null);
+        } else {
+            mli = (MessageListItem) convertView;
+        }
+        mli.setMessage(messages.get(position));
+        return mli;
     }
 
 }

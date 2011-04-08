@@ -1,6 +1,11 @@
 package se.su.dsv.scipro.android.dao;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+    
+    private static final long serialVersionUID = -7102705806225167000L;
+
     private static int counter = 0;
     
     private int id;

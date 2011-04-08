@@ -29,6 +29,5 @@ public class PrivateMessageViewActivity extends SciProActivity {
         messageText = (TextView) findViewById(R.id.message_text);
         messageText.setText(message.getMessage());
     }
-    
-    
+        
 }

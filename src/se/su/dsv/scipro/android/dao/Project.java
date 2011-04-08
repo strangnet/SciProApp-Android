@@ -1,9 +1,13 @@
 package se.su.dsv.scipro.android.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+public class Project implements Serializable {
+    
+    private static final long serialVersionUID = 1712537089207993167L;
+
     private static int counter = 0;
     
     private int id;

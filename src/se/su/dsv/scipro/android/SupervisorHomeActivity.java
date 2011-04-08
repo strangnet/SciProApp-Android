@@ -3,11 +3,14 @@ package se.su.dsv.scipro.android;
 import se.su.dsv.scipro.android.adapters.ProjectListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 public class SupervisorHomeActivity extends ListActivity {
+    
+    private static final int SHOW_PROJECT = 1;
     
     private ProjectListAdapter adapter;
     
@@ -29,7 +32,9 @@ public class SupervisorHomeActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        
+        Intent intent = new Intent(this, ProjectViewActivity.class);
+        intent.putExtra("project", adapter.getItem(position));
+        startActivityForResult(intent, SHOW_PROJECT);
     }
 
     private void setUpViews() {

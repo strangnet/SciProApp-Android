@@ -1,6 +1,11 @@
 package se.su.dsv.scipro.android.dao;
 
-public class PrivateMessage {
+import java.io.Serializable;
+
+public class PrivateMessage implements Serializable {
+    
+    private static final long serialVersionUID = 1678548421983921901L;
+
     private static int counter = 0;
     
     private int id;
