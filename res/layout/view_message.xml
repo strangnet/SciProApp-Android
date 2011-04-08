@@ -8,7 +8,7 @@
 		android:layout_height="wrap_content" 
 		android:text="Message Subject" 
 		android:layout_width="fill_parent" 
-		android:paddingBottom="8sp" 
+		android:paddingBottom="4sp" 
 		android:textSize="12sp" 
 		android:id="@+id/message_subject" 
 		android:layout_alignParentLeft="true" />
@@ -17,12 +17,13 @@
 		android:text="[From]" 
 		android:layout_width="fill_parent" 
 		android:id="@+id/message_from"
-		android:textSize="8sp"
+		android:textSize="12sp"
 		android:layout_below="@id/message_subject" />
 	<TextView
 		android:text="[Message]" 
 		android:layout_width="fill_parent" 
 		android:id="@+id/message_text"
 		android:layout_below="@id/message_from" 
-		android:layout_height="fill_parent" />
+		android:layout_height="fill_parent"
+		android:paddingTop="24sp" />
 </RelativeLayout>
