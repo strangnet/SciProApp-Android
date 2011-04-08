@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="username">Username</string>
+    <string name="scipro_code">SciPro code</string>
+    <string name="clear_user">Clear user</string>
+</resources>

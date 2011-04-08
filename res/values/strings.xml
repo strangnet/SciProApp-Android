@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Welcome to the SciProApp</string>
+    <string name="hello">Home</string>
     <string name="app_name">SciProApp</string>
-    <string name="switch_color">Switch Color</string>
+    <string name="switch_screen">Switch screen</string>
 </resources>

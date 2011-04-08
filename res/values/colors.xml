@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="su_blue_1">#ff002f5f</color>
+	<color name="su_blue_2">#ff33597f</color>
+	<color name="su_blue_3">#ff66829f</color>
+	<color name="su_blue_4">#ff99acbf</color>
+	<color name="su_blue_5">#ffccd5df</color>
+	<color name="su_olive_1">#ffa3a86b</color>
+	<color name="su_olive_2">#ffb5b989</color>
+	<color name="su_olive_3">#ffc8cba6</color>
+	<color name="su_olive_4">#ffdadcc4</color>
+	<color name="su_olive_5">#ffedeee1</color>
+	<color name="su_heaven_1">#ffacdee6</color>
+	<color name="su_heaven_2">#ffbde5eb</color>
+	<color name="su_heaven_3">#ffcbebf0</color>
+	<color name="su_heaven_4">#ffdef2f5</color>
+	<color name="su_heaven_5">#ffeef8fa</color>
+	<color name="su_water_1">#ff9bb2ce</color>
+	<color name="su_water_2">#ffafc1d8</color>
+	<color name="su_water_3">#ffc3d1e2</color>
+	<color name="su_water_4">#ffd7e0eb</color>
+	<color name="su_water_5">#ffebf0f5</color>
+	<color name="su_fire_1">#ffd95e00</color>
+	<color name="su_fire_2">#ffe17e33</color>
+	<color name="su_fire_3">#ffe89e66</color>
+	<color name="su_fire_4">#fff0bf99</color>
+	<color name="su_fire_5">#fff7dfcc</color>
+	<color name="black">#ff000000</color>
+</resources>
