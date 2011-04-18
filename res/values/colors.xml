@@ -26,4 +26,5 @@
 	<color name="su_fire_4">#fff0bf99</color>
 	<color name="su_fire_5">#fff7dfcc</color>
 	<color name="black">#ff000000</color>
+	<color name="light_grey">#fff2f2f2</color>
 </resources>

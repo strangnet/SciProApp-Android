@@ -24,5 +24,4 @@
 		android:text="No projects"
 		android:gravity="center_vertical|center_horizontal"
 		android:layout_below="@id/projects_title" />
-	
 </RelativeLayout>
