@@ -6,10 +6,20 @@
 	<TextView 
 		android:textStyle="bold" 
 		android:layout_height="wrap_content" 
-		android:text="Project Title" 
+		android:text="[Project Title]" 
 		android:layout_width="fill_parent" 
-		android:paddingBottom="8sp" 
-		android:textSize="16sp" 
+		android:padding="5dip" 
+		android:textSize="16dip" 
 		android:id="@+id/project_title" 
 		android:layout_alignParentLeft="true" />
+	<TextView
+		android:layout_height="wrap_content" 
+		android:text="[Project Info]" 
+		android:layout_width="fill_parent"
+		android:padding="5dip" 
+		android:paddingTop="8dip"
+		android:layout_alignParentLeft="true"
+		android:id="@+id/project_data_info"
+		android:layout_below="@id/project_title"
+		android:textSize="14dip" />
 </RelativeLayout>

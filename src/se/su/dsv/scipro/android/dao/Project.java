@@ -26,9 +26,14 @@ public class Project implements Serializable {
 
     private static int counter = 0;
     
+    public static enum STATUS {
+        POSITIVE, NEUTRAL, NEGATIVE;
+    }
+    
     private int id;
     private ArrayList<User> members;
     private String title;
+    private STATUS status;
     
     public Project(String title) {
         this.title = title;
@@ -54,5 +59,13 @@ public class Project implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+    
+    public STATUS getStatus() {
+        return status;
+    }
+    
+    public void setStatus(STATUS status) {
+        this.status = status;
     }
 }

@@ -42,7 +42,7 @@ public class PrivateMessageView extends SciProActivity {
         subjectText = (TextView) findViewById(R.id.message_subject);
         subjectText.setText(message.getSubject());
         fromText = (TextView) findViewById(R.id.message_from);
-        fromText.setText("From: " + message.getFromUser().getName());
+        fromText.setText("From: " + message.getFromUser().toString());
         messageText = (TextView) findViewById(R.id.message_text);
         messageText.setText(message.getMessage());
     }

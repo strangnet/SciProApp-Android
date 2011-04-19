@@ -4,9 +4,9 @@
     android:layout_height="fill_parent">
     <TextView
 		android:id="@+id/projects_title"
-		android:textSize="16sp"
+		android:textSize="18dip"
 		android:textStyle="bold"
-		android:paddingBottom="8sp"
+		android:padding="5dip"
 	    android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content" 
 	    android:text="Projects" />
@@ -15,8 +15,8 @@
 		android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/projects_title"
-	    android:paddingLeft="6sp"
-	    android:paddingRight="6sp" />
+	    android:paddingLeft="4dip"
+	    android:paddingRight="4dip" />
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

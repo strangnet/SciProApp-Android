@@ -17,18 +17,22 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.User;
+import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class NewMessage extends SciProActivity {
 
-    private TextView recipientField;
+    private AutoCompleteTextView recipientField;
     private TextView subjectField;
     private Button submitButton;
 
@@ -84,9 +88,13 @@ public class NewMessage extends SciProActivity {
     }
 
     private void setUpViews() {
-        recipientField = (TextView) findViewById(R.id.to_edit);
+        recipientField = (AutoCompleteTextView) findViewById(R.id.to_edit);
         subjectField = (TextView) findViewById(R.id.subject_edit);
         submitButton = (Button) findViewById(R.id.send_message);
+        
+        ArrayAdapter<User> adapter = new ArrayAdapter<User>(this, 
+                android.R.layout.simple_dropdown_item_1line, DummyData.getInstance().getUsers());
+        recipientField.setAdapter(adapter);
 
         recipientField.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {

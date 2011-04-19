@@ -18,6 +18,7 @@ package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.Project;
+import se.su.dsv.scipro.android.dao.User;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class ProjectView extends SciProActivity {
     
     private Project project;
     private TextView titleText;
+    private TextView infoText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,26 @@ public class ProjectView extends SciProActivity {
     private void setUpViews() {
         titleText = (TextView) findViewById(R.id.project_title);
         titleText.setText(project.getTitle());
+        infoText = (TextView) findViewById(R.id.project_data_info);
+        String projectInfo = "Member(s):\n";
+        for (User u : project.getMembers())
+            projectInfo += u.getName() + "\n";
+        projectInfo += "\nStatus: ";
+        Project.STATUS status = project.getStatus();
+        switch (status) {
+        case NEGATIVE:
+            projectInfo += "Negative\n";
+            break;
+        case POSITIVE:
+            projectInfo += "Positive\n";
+            break;
+        case NEUTRAL:
+        default:
+            projectInfo += "Neutral\n";
+        }
+        
+        projectInfo += "\nNo new Mesage Board Messages.";
+        infoText.setText(projectInfo);
     }
     
 }

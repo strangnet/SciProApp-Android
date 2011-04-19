@@ -58,25 +58,28 @@ public class DummyData {
 
     private void addUsers() {
         users = new ArrayList<User>();
-        users.add(new User("Janne"));
-        users.add(new User("Mia"));
-        users.add(new User("Patrick"));
-        users.add(new User("Helena"));
-        users.add(new User("Johan"));
-        users.add(new User("Anna"));
+        users.add(new User("Janne", "janne@epost.se"));
+        users.add(new User("Mia", "mia@epost.se"));
+        users.add(new User("Patrick", "patrick@epost.se"));
+        users.add(new User("Helena","helena@epost.se"));
+        users.add(new User("Johan", "johan@epost.se"));
+        users.add(new User("Anna", "anna@epost.se"));
     }
     
     private void addProjects() {
         projects = new ArrayList<Project>();
         Project p = new Project("Smartphones in education");
+        p.setStatus(Project.STATUS.NEUTRAL);
         p.addMember(users.get(2));
         p.addMember(users.get(4));
         projects.add(p);
         p = new Project("HCI for large systems");
+        p.setStatus(Project.STATUS.POSITIVE);
         p.addMember(users.get(0));
         p.addMember(users.get(5));
         projects.add(p);
         p = new Project("CSF for medium enterprises");
+        p.setStatus(Project.STATUS.NEGATIVE);
         p.addMember(users.get(1));
         p.addMember(users.get(3));
         projects.add(p);
