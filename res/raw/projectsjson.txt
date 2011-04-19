@@ -1,0 +1,26 @@
+[{
+	"project_id":"1",
+	"project_name:"Mobila applikationer som stöd i den vetenskapliga processen",
+	"members":[
+		{"user_id":"1",
+		"user_name":"patr-str",
+		"user_first":"Patrick",
+		"user_last":"Strang"},
+		{"user_id":"2",
+		"user_name":"joha-asc",
+		"user_first":"Johan",
+		"user_last":"Aschan"}]
+},
+{
+	"project_id":"2",
+	"project_name:"CSF in medium enterprises",
+	"members":[
+		{"user_id":"3",
+		"user_name":"anna-aar",
+		"user_first":"Anna",
+		"user_last":"Aardvark"},
+		{"user_id":"4",
+		"user_name":"beri-ber",
+		"user_first":"Berit",
+		"user_last":"Berndtsson"}]
+}]
