@@ -17,9 +17,6 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.id;
-import se.su.dsv.scipro.android.R.layout;
-import se.su.dsv.scipro.android.R.string;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -29,7 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class NewMessageActivity extends SciProActivity {
+public class NewMessage extends SciProActivity {
 
     private TextView recipientField;
     private TextView subjectField;

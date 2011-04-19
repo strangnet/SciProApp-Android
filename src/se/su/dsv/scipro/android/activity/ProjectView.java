@@ -16,14 +16,12 @@
 
 package se.su.dsv.scipro.android.activity;
 
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.Project;
 import android.os.Bundle;
 import android.widget.TextView;
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.id;
-import se.su.dsv.scipro.android.R.layout;
-import se.su.dsv.scipro.android.dao.Project;
 
-public class ProjectViewActivity extends SciProActivity {
+public class ProjectView extends SciProActivity {
     
     private Project project;
     private TextView titleText;

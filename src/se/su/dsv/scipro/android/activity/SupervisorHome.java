@@ -17,7 +17,6 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.layout;
 import se.su.dsv.scipro.android.adapter.ProjectListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.content.Intent;
@@ -25,7 +24,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class SupervisorHomeActivity extends SciProListActivity {
+public class SupervisorHome extends SciProListActivity {
     
     private static final int SHOW_PROJECT = 1;
     
@@ -49,7 +48,7 @@ public class SupervisorHomeActivity extends SciProListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(this, ProjectViewActivity.class);
+        Intent intent = new Intent(this, ProjectView.class);
         intent.putExtra("project", adapter.getItem(position));
         startActivityForResult(intent, SHOW_PROJECT);
     }

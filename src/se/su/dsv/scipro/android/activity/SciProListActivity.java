@@ -18,8 +18,6 @@ package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.Preferences;
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.id;
-import se.su.dsv.scipro.android.R.menu;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;

@@ -17,13 +17,11 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.id;
-import se.su.dsv.scipro.android.R.layout;
 import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class PrivateMessageViewActivity extends SciProActivity {
+public class PrivateMessageView extends SciProActivity {
 
     private PrivateMessage message;
     private TextView subjectText;

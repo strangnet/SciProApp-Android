@@ -17,9 +17,6 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.id;
-import se.su.dsv.scipro.android.R.layout;
-import se.su.dsv.scipro.android.R.menu;
 import se.su.dsv.scipro.android.adapter.MessageListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.content.Intent;
@@ -30,11 +27,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class PrivateMessagesViewActivity extends SciProListActivity {
+public class PrivateMessages extends SciProListActivity {
 
     private static final int SHOW_MESSAGE = 1;
     private static final int NEW_MESSAGE = 2;
@@ -50,7 +47,7 @@ public class PrivateMessagesViewActivity extends SciProListActivity {
         
         switch (item.getItemId()) {
         case R.id.messages_context_view:
-            Intent intent = new Intent(this, PrivateMessageViewActivity.class);
+            Intent intent = new Intent(this, PrivateMessageView.class);
             intent.putExtra("message", adapter.getItem(info.position));
             startActivityForResult(intent, SHOW_MESSAGE);
             return true;
@@ -88,7 +85,7 @@ public class PrivateMessagesViewActivity extends SciProListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(this, PrivateMessageViewActivity.class);
+        Intent intent = new Intent(this, PrivateMessageView.class);
         intent.putExtra("message", adapter.getItem(position));
         startActivityForResult(intent, SHOW_MESSAGE);
     }
@@ -104,7 +101,7 @@ public class PrivateMessagesViewActivity extends SciProListActivity {
         submitButton.setOnClickListener(new OnClickListener() {
             
             public void onClick(View v) {
-                Intent intent = new Intent(PrivateMessagesViewActivity.this, NewMessageActivity.class);
+                Intent intent = new Intent(PrivateMessages.this, NewMessage.class);
                 startActivityForResult(intent, NEW_MESSAGE);
             }
         });

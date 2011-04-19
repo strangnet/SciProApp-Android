@@ -11,18 +11,18 @@
 
 
     <application android:name="SciProApplication" android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name="activity.SciProTabWidget" android:label="@string/app_name"
+        <activity android:name="se.su.dsv.scipro.android.activity.SciProTabWidget" android:label="@string/app_name"
         	android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SupervisorHomeActivityActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".activity.NewMessageActivitywMessageActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".Preferences" android:label="@string/app_name"></activity>
-		<activity android:name=".activity.ProjectViewActivityActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".activity.PrivateMessageViewActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".activity.PrivateMessagesViewActivity" android:label="@string/app_name"></activity>
+        <activity android:name="se.su.dsv.scipro.android.activity.SupervisorHome" android:label="@string/app_name"></activity>
+		<activity android:name="se.su.dsv.scipro.android.activity.NewMessage" android:label="@string/app_name"></activity>
+		<activity android:name="se.su.dsv.scipro.android.Preferences" android:label="@string/app_name"></activity>
+		<activity android:name="se.su.dsv.scipro.android.activity.ProjectView" android:label="@string/app_name"></activity>
+		<activity android:name="se.su.dsv.scipro.android.activity.PrivateMessageView" android:label="@string/app_name"></activity>
+		<activity android:name="se.su.dsv.scipro.android.activity.PrivateMessages" android:label="@string/app_name"></activity>
     </application>
 </manifest>

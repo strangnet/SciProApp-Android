@@ -17,9 +17,9 @@
 package se.su.dsv.scipro.android.activity;
 
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.R.layout;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
@@ -30,17 +30,17 @@ public class SciProTabWidget extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_view);
         
-//        Resources res = getResources();
+        Resources res = getResources();
         TabHost tabHost = getTabHost();
         TabHost.TabSpec spec;
         Intent intent;
         
-        intent = new Intent().setClass(this, SupervisorHomeActivity.class);
-        spec = tabHost.newTabSpec("home").setIndicator("Home").setContent(intent);
+        intent = new Intent().setClass(this, SupervisorHome.class);
+        spec = tabHost.newTabSpec("home").setIndicator("Home", res.getDrawable(R.drawable.ic_tab_home)).setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, PrivateMessagesViewActivity.class);
-        spec = tabHost.newTabSpec("messages").setIndicator("Messages").setContent(intent);
+        intent = new Intent().setClass(this, PrivateMessages.class);
+        spec = tabHost.newTabSpec("messages").setIndicator("Messages", res.getDrawable(R.drawable.ic_tab_messages)).setContent(intent);
         tabHost.addTab(spec);
         
         tabHost.setCurrentTab(0);
