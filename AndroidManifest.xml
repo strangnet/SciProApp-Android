@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="se.su.dsv.scipro.android"
-      android:versionCode="1"
-      android:versionName="0.1">
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7"></uses-sdk>
+      android:versionCode="3"
+      android:versionName="0.2">
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.VIBRATE" />
+<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7" />
 
 
-    <application android:name=".SciProApplication" android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".SciProTabWidget" android:label="@string/app_name"
+    <application android:name="SciProApplication" android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name="activity.SciProTabWidget" android:label="@string/app_name"
         	android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SupervisorHomeActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".NewMessageActivity" android:label="@string/app_name"></activity>
-		<activity android:name="Preferences" android:label="@string/app_name"></activity>
-		<activity android:name=".ProjectViewActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".PrivateMessageViewActivity" android:label="@string/app_name"></activity>
-		<activity android:name=".PrivateMessagesViewActivity" android:label="@string/app_name"></activity>
+        <activity android:name=".activity.SupervisorHomeActivityActivity" android:label="@string/app_name"></activity>
+		<activity android:name=".activity.NewMessageActivitywMessageActivity" android:label="@string/app_name"></activity>
+		<activity android:name=".Preferences" android:label="@string/app_name"></activity>
+		<activity android:name=".activity.ProjectViewActivityActivity" android:label="@string/app_name"></activity>
+		<activity android:name=".activity.PrivateMessageViewActivity" android:label="@string/app_name"></activity>
+		<activity android:name=".activity.PrivateMessagesViewActivity" android:label="@string/app_name"></activity>
     </application>
 </manifest>
