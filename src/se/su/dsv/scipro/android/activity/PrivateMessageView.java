@@ -33,7 +33,7 @@ public class PrivateMessageView extends SciProActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         message = (PrivateMessage) bundle.getSerializable("message");
-        setContentView(R.layout.view_message);
+        setContentView(R.layout.activity_message);
         
         setUpViews();
     }

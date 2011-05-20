@@ -16,44 +16,152 @@
 
 package se.su.dsv.scipro.android.json;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.json.JSONArray;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EncodingUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import se.su.dsv.scipro.android.SciProApplication;
+import se.su.dsv.scipro.android.util.StringUtils;
+import android.util.Log;
 
 public class SciProJSON {
     
-    private String url;
-    private int res;
+    private static final String SCIPRO_JSON_ADDRESS = "http://130.237.157.173:8080/SciPro/json/";
+    private static final String TAG = "SciProJSON";
     
-    public SciProJSON(String url) {
-        this.url = url;
+    private String username = "hhansson";
+    private String apikey = "ryQzoxDsP/rvwD5H7ekt2ZLxLNs=";
+//    private String apikey = "mFWsM/d7xif4/tc5ZRXoS9PMIUg=";
+//    private long userid = 6675;
+    private long userid = 30;
+    private String contentType = "application/json";
+    
+    private DefaultHttpClient httpClient;
+    
+    public SciProJSON() {
+        HttpParams params = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(params, 5000);
+        HttpConnectionParams.setSoTimeout(params, 5000); 
+        httpClient = new DefaultHttpClient(params);
+        BasicCookieStore cookieStore = new BasicCookieStore();
+        httpClient.setCookieStore(cookieStore);
     }
     
-    public SciProJSON(int res) {
-        this.res = res;
-    }
-    
-    public String readJSON() {
-        String x ="";
+    public String getProjectsJSON() {
+        String result = "";
+        String uri = SCIPRO_JSON_ADDRESS + "project";
+        
+//        JSONObject jsonObj = new JSONObject();
+//        
+//        try {
+//            jsonObj.put("userid", userid);
+//            jsonObj.put("apikey", apikey);
+//        } catch (JSONException e) {
+//            Log.e(TAG, "JSONException: " + e);
+//        }
+        
+        HttpPost httpPost = new HttpPost(uri);
+        
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("userid", String.valueOf(userid)));
+        postParams.add(new BasicNameValuePair("apikey", apikey));
         try {
-            InputStream is = SciProApplication.getInstance().getResources().openRawResource(res);
-            byte[] buffer = new byte[is.available()];
-            while (is.read(buffer) != -1);
-            String jsonText = new String(buffer);
-            JSONArray entries = new JSONArray(jsonText);
-            
-            for (int i = 0; i < entries.length(); i++) {
-                JSONObject entry = entries.getJSONObject(i);
-            }
-            
-            x = jsonText;
-        } catch (Exception e) {
-            x = "Error reading json: " + e.getMessage();
+            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(postParams);
+            entity.setContentEncoding(HTTP.UTF_8);
+            httpPost.setEntity(entity);
+            httpPost.setHeader("Accept", contentType);
+        } catch (UnsupportedEncodingException e) {
+            Log.e(TAG, "UnsupportedEncodingException: " + e);
         }
         
-        return x;
+        try {
+            HttpResponse httpResponse = httpClient.execute(httpPost, new BasicHttpContext());
+            HttpEntity httpEntity = httpResponse.getEntity();
+            
+            if (httpEntity != null) {
+                InputStream is = httpEntity.getContent();
+                result = StringUtils.convertStreamToString(is);
+            }
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        Log.i(TAG, result);
+        
+        return result;
+    }
+    
+    public String jsonAuth() {
+        String result = "";
+        String uri = SCIPRO_JSON_ADDRESS + "auth";
+        
+        JSONObject jsonObj = new JSONObject();
+        
+        try {
+            jsonObj.put("username", username);
+            jsonObj.put("apikey", apikey);
+        } catch (JSONException e) {
+            Log.e(TAG, "JSONException: " + e);
+        }
+        
+        HttpPost httpPost = new HttpPost(uri);
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("json", jsonObj.toString()));
+        try {
+            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(postParams);
+            entity.setContentEncoding(HTTP.UTF_8);
+            httpPost.setEntity(entity);
+            httpPost.setHeader("Accept", contentType);
+        } catch (UnsupportedEncodingException e) {
+            Log.e(TAG, "UnsupportedEncodingException: " + e);
+        }
+        
+        try {
+            HttpResponse httpResponse = httpClient.execute(httpPost, new BasicHttpContext());
+            HttpEntity httpEntity = httpResponse.getEntity();
+            
+            if (httpEntity != null) {
+                InputStream is = httpEntity.getContent();
+                result = StringUtils.convertStreamToString(is);
+            }
+        } catch (ClientProtocolException e) {
+            Log.e(TAG, "ClientProtocolException: " + e);
+        } catch (IOException e) {
+            Log.e(TAG, "IOException: " + e);
+        }
+        
+        Log.i(TAG, result);
+        
+        return result;
     }
 }

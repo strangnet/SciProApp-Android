@@ -28,11 +28,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 public class NewMessage extends SciProActivity {
 
-    private AutoCompleteTextView recipientField;
+    private MultiAutoCompleteTextView recipientField;
     private TextView subjectField;
     private Button submitButton;
 
@@ -42,7 +43,7 @@ public class NewMessage extends SciProActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.compose_message);
+        setContentView(R.layout.activity_compose_message);
 
         setUpViews();
     }
@@ -88,7 +89,7 @@ public class NewMessage extends SciProActivity {
     }
 
     private void setUpViews() {
-        recipientField = (AutoCompleteTextView) findViewById(R.id.to_edit);
+        recipientField = (MultiAutoCompleteTextView) findViewById(R.id.to_edit);
         subjectField = (TextView) findViewById(R.id.subject_edit);
         submitButton = (Button) findViewById(R.id.send_message);
         

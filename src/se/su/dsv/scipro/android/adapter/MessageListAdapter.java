@@ -53,7 +53,7 @@ public class MessageListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MessageListItem mli;
         if (convertView == null) {
-            mli = (MessageListItem) View.inflate(context, R.layout.message_list_item, null);
+            mli = (MessageListItem) View.inflate(context, R.layout.list_item_message, null);
         } else {
             mli = (MessageListItem) convertView;
         }

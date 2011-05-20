@@ -16,15 +16,18 @@
 
 package se.su.dsv.scipro.android.activity;
 
+import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.Preferences;
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.util.SciProUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
-public abstract class SciProActivity extends Activity {
+public abstract class SciProActivity extends Activity implements IHeaderOnClick {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,5 +45,13 @@ public abstract class SciProActivity extends Activity {
             return true;
         default: return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+    
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
     }
 }

@@ -20,14 +20,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project implements Serializable {
+public class Project implements Serializable, Comparable<Project> {
     
     private static final long serialVersionUID = 1712537089207993167L;
 
     private static int counter = 0;
     
     public static enum STATUS {
-        POSITIVE, NEUTRAL, NEGATIVE;
+        POSITIVE, NEUTRAL, NEGATIVE;        
     }
     
     private int id;
@@ -67,5 +67,9 @@ public class Project implements Serializable {
     
     public void setStatus(STATUS status) {
         this.status = status;
+    }
+
+    public int compareTo(Project another) {
+        return this.getStatus().compareTo(another.getStatus());
     }
 }

@@ -58,12 +58,12 @@ public class DummyData {
 
     private void addUsers() {
         users = new ArrayList<User>();
-        users.add(new User("Janne", "janne@epost.se"));
-        users.add(new User("Mia", "mia@epost.se"));
-        users.add(new User("Patrick", "patrick@epost.se"));
-        users.add(new User("Helena","helena@epost.se"));
-        users.add(new User("Johan", "johan@epost.se"));
-        users.add(new User("Anna", "anna@epost.se"));
+        users.add(new User("Janne", "Nilsson", "janne@epost.se"));
+        users.add(new User("Mia", "Persson", "mia@epost.se"));
+        users.add(new User("Patrick", "Clipper", "patrick@epost.se"));
+        users.add(new User("Helena", "Jonsson", "helena@epost.se"));
+        users.add(new User("Johan", "Andersson", "johan@epost.se"));
+        users.add(new User("Anna", "Nilsson-Torefjord", "anna@epost.se"));
     }
     
     private void addProjects() {

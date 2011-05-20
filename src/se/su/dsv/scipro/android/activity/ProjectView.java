@@ -20,6 +20,8 @@ import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.Project;
 import se.su.dsv.scipro.android.dao.User;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ProjectView extends SciProActivity {
@@ -33,7 +35,7 @@ public class ProjectView extends SciProActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         project = (Project) bundle.getSerializable("project");
-        setContentView(R.layout.view_project);
+        setContentView(R.layout.activity_project);
         
         setUpViews();
     }
@@ -41,6 +43,8 @@ public class ProjectView extends SciProActivity {
     private void setUpViews() {
         titleText = (TextView) findViewById(R.id.project_title);
         titleText.setText(project.getTitle());
+        ImageButton homeButton = (ImageButton) findViewById(R.id.header_home_btn);
+        homeButton.setVisibility(View.VISIBLE);
         infoText = (TextView) findViewById(R.id.project_data_info);
         String projectInfo = "Member(s):\n";
         for (User u : project.getMembers())
@@ -59,8 +63,9 @@ public class ProjectView extends SciProActivity {
             projectInfo += "Neutral\n";
         }
         
-        projectInfo += "\nNo new Mesage Board Messages.";
+        projectInfo += "\nNo new Message Board Messages.";
         infoText.setText(projectInfo);
     }
+    
     
 }

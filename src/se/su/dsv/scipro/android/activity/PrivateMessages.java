@@ -73,7 +73,7 @@ public class PrivateMessages extends SciProListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.message_list);
+        setContentView(R.layout.list_message);
         
         setUpViews();
         adapter = new MessageListAdapter(DummyData.getInstance().getMessages(), this);

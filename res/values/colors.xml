@@ -25,6 +25,15 @@
 	<color name="su_fire_3">#ffe89e66</color>
 	<color name="su_fire_4">#fff0bf99</color>
 	<color name="su_fire_5">#fff7dfcc</color>
+	
 	<color name="black">#ff000000</color>
 	<color name="light_grey">#fff2f2f2</color>
+	
+	<color name="header_background">#ff002f5f</color>
+	<color name="header_foreground">#ffacdee6</color>
+	<color name="foreground_default">#ff002f5f</color>
+	<color name="foreground_alt">#ff9bb2ce</color>
+	<color name="background_basic">#ffffffff</color>
+	<color name="background_default">#ffc3d1e2</color>
+	<color name="background_alt">#ffd7e0eb</color>
 </resources>

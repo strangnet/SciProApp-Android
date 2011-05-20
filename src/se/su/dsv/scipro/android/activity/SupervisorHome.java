@@ -19,25 +19,34 @@ package se.su.dsv.scipro.android.activity;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.adapter.ProjectListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
+import se.su.dsv.scipro.android.json.SciProJSON;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class SupervisorHome extends SciProListActivity {
     
     private static final int SHOW_PROJECT = 1;
+    private static final String TAG = "SupervisorHome";
     
     private ProjectListAdapter adapter;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.supervisor_home);
+        setContentView(R.layout.activity_supervisor_home);
         
         setUpViews();
-        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects(), this);
+        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
         setListAdapter(adapter);
+        
+        SciProJSON scpj = new SciProJSON();
+        String res = scpj.jsonAuth();
+        Log.i(TAG, String.valueOf(res.length()));
+        
     }
     
     @Override
@@ -54,7 +63,8 @@ public class SupervisorHome extends SciProListActivity {
     }
 
     private void setUpViews() {
-        
+        ImageView headerLogo = (ImageView) findViewById(R.id.header_logo);
+        headerLogo.setVisibility(View.VISIBLE);
     }
 
 }

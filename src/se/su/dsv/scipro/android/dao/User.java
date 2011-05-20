@@ -25,11 +25,13 @@ public class User implements Serializable {
     private static int counter = 0;
     
     private int id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     
-    public User(String name, String email) {
-        this.name = name;
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         id = counter++;
     }
@@ -39,7 +41,7 @@ public class User implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return firstName + " " + lastName;
     }
     
     public String getEmail() {
@@ -47,6 +49,6 @@ public class User implements Serializable {
     }
     
     public String toString() {
-        return name + " (" + email + ")";
+        return getName() + " (" + email + ")";
     }
 }

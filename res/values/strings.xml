@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Home</string>
-    <string name="app_name">SciProApp</string>
+    <string name="app_name">SciPro</string>
     <string name="switch_screen">Switch screen</string>
+    <string name="title_new_message">New Message</string>
+    <string name="title_preferences">Preferences</string>
+    <string name="title_project">Project</string>
+    <string name="title_message">Message</string>
+    <string name="title_messages">Messages</string>
 </resources>

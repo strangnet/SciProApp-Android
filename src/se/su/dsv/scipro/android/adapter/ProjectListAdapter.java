@@ -16,26 +16,25 @@
 
 package se.su.dsv.scipro.android.adapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.DaoUtils;
 import se.su.dsv.scipro.android.dao.Project;
-import se.su.dsv.scipro.android.view.ProjectListItem;
-
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ProjectListAdapter extends BaseAdapter {
-
-    private ArrayList<Project> projects;
-    private Context context;
     
-    public ProjectListAdapter(ArrayList<Project> projects, Context context) {
-        super();
+    private final List<Project> projects;
+    
+    public ProjectListAdapter(List<Project> projects) {
         this.projects = projects;
-        this.context = context;
     }
     
     public int getCount() {
@@ -43,7 +42,7 @@ public class ProjectListAdapter extends BaseAdapter {
     }
 
     public Project getItem(int position) {
-        return projects == null ? null : projects.get(position);
+        return projects.get(position);
     }
 
     public long getItemId(int position) {
@@ -51,14 +50,40 @@ public class ProjectListAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ProjectListItem pli;
-        if (convertView == null) {
-            pli = (ProjectListItem) View.inflate(context, R.layout.project_list_item, null);
-        } else {
-            pli = (ProjectListItem) convertView;
+        ViewGroup item = getViewGroup(convertView, parent);
+        
+        TextView title = (TextView) item.findViewById(R.id.project_list_item_title);
+        TextView misc = (TextView) item.findViewById(R.id.project_list_item_misc);
+        ImageView status = (ImageView) item.findViewById(R.id.project_list_item_status);
+        
+        Project p = getItem(position);
+        title.setText(p.getTitle());
+        misc.setText(DaoUtils.projectMembersAsString(p));
+        switch (p.getStatus()) {
+        case NEGATIVE:
+            status.setImageResource(R.drawable.red_ball_small);
+            break;
+        case POSITIVE:
+            status.setImageResource(R.drawable.green_ball_small);
+            break;
+        case NEUTRAL:
+        default:
+            status.setImageResource(R.drawable.yellow_ball_small);
         }
-        pli.setProject(projects.get(position));
-        return pli;
+        status.setAdjustViewBounds(true);
+        
+        return item;
     }
-
+    
+    private ViewGroup getViewGroup(View convertView, ViewGroup parent) {
+        
+        if (convertView instanceof ViewGroup)
+            return (ViewGroup) convertView;
+        
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.list_item_project, null);
+        
+        return item;
+    }
 }

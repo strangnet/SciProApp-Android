@@ -15,4 +15,10 @@
 		android:key="PREF_PUSH"
 		android:title="Push notifications"
 		android:summary="Sets if push notifications are enabled." />
+	<PreferenceCategory
+		android:title="Location Services" />
+	<CheckBoxPreference
+		android:key="PREF_LOCATION"
+		android:title="Location Services"
+		android:summary="Enables you to use the check-in feature when you arrive at work." />
 </PreferenceScreen>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SlidingDrawer
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/location_drawer"
+  android:layout_width="fill_parent"
+  android:layout_height="80dip"
+  android:handle="@+id/location_drawer_handle"
+  android:content="@+id/location_drawer_content">
+  <TextView
+  	android:id="@id/location_drawer_handle"
+  	android:text="LOC"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:background="#ff333333" />
+  <LinearLayout
+  	xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:id="@id/location_drawer_content"
+  	android:gravity="center_horizontal"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:background="@color/light_grey">
+  	<TextView
+  	  android:id="@+id/location_drawer_content_text"
+  	  android:layout_width="fill_parent"
+  	  android:layout_height="fill_parent"
+  	  android:text="Location" />
+  </LinearLayout>
+</SlidingDrawer>
