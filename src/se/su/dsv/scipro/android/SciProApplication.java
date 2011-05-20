@@ -32,4 +32,7 @@ public class SciProApplication extends Application {
         instance = this;
     }
 
+    public boolean authenticated() {
+        return false;
+    }
 }

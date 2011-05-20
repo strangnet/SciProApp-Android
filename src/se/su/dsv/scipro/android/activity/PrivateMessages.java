@@ -16,22 +16,23 @@
 
 package se.su.dsv.scipro.android.activity;
 
+import android.app.ListActivity;
+import android.view.*;
+import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.adapter.MessageListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
+import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.util.SciProUtils;
 
-public class PrivateMessages extends SciProListActivity {
+public class PrivateMessages extends ListActivity implements IHeaderOnClick {
 
     private static final int SHOW_MESSAGE = 1;
     private static final int NEW_MESSAGE = 2;
@@ -107,5 +108,24 @@ public class PrivateMessages extends SciProListActivity {
         });
     }
     
-    
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return MenuHelper.openActivityFromMenuItem(this, item);
+    }
 }

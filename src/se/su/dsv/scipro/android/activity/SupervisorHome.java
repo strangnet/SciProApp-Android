@@ -16,18 +16,26 @@
 
 package se.su.dsv.scipro.android.activity;
 
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.adapter.ProjectListAdapter;
-import se.su.dsv.scipro.android.dummydata.DummyData;
-import se.su.dsv.scipro.android.json.SciProJSON;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import se.su.dsv.scipro.android.IHeaderOnClick;
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.SciProApplication;
+import se.su.dsv.scipro.android.adapter.ProjectListAdapter;
+import se.su.dsv.scipro.android.dummydata.DummyData;
+import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.json.SciProJSON;
+import se.su.dsv.scipro.android.util.SciProUtils;
 
-public class SupervisorHome extends SciProListActivity {
+public class SupervisorHome extends ListActivity implements IHeaderOnClick {
     
     private static final int SHOW_PROJECT = 1;
     private static final String TAG = "SupervisorHome";
@@ -37,6 +45,11 @@ public class SupervisorHome extends SciProListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!SciProApplication.getInstance().authenticated()) {
+            Intent intent = new Intent(this, Authenticate.class);
+            startActivity(intent);
+        }
         setContentView(R.layout.activity_supervisor_home);
         
         setUpViews();
@@ -67,4 +80,24 @@ public class SupervisorHome extends SciProListActivity {
         headerLogo.setVisibility(View.VISIBLE);
     }
 
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return MenuHelper.openActivityFromMenuItem(this, item);
+    }
 }

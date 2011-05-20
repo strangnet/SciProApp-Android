@@ -16,22 +16,26 @@
 
 package se.su.dsv.scipro.android.activity;
 
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.dao.User;
-import se.su.dsv.scipro.android.dummydata.DummyData;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.User;
+import se.su.dsv.scipro.android.dummydata.DummyData;
+import se.su.dsv.scipro.android.helpers.MenuHelper;
 
-public class NewMessage extends SciProActivity {
+public class NewMessage extends Activity {
 
     private MultiAutoCompleteTextView recipientField;
     private TextView subjectField;
@@ -122,6 +126,19 @@ public class NewMessage extends SciProActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return MenuHelper.openActivityFromMenuItem(this, item);
     }
     
 }

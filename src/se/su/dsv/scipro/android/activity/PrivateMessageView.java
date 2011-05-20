@@ -16,12 +16,20 @@
 
 package se.su.dsv.scipro.android.activity;
 
+import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.os.Bundle;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.util.SciProUtils;
 
-public class PrivateMessageView extends SciProActivity {
+public class PrivateMessageView extends Activity implements IHeaderOnClick {
 
     private PrivateMessage message;
     private TextView subjectText;
@@ -46,5 +54,25 @@ public class PrivateMessageView extends SciProActivity {
         messageText = (TextView) findViewById(R.id.message_text);
         messageText.setText(message.getMessage());
     }
-        
+
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return MenuHelper.openActivityFromMenuItem(this, item);
+    }
 }

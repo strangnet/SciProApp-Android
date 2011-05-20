@@ -16,6 +16,11 @@
 
 package se.su.dsv.scipro.android.activity;
 
+import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.Project;
 import se.su.dsv.scipro.android.dao.User;
@@ -23,8 +28,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.util.SciProUtils;
 
-public class ProjectView extends SciProActivity {
+public class ProjectView extends Activity implements IHeaderOnClick {
     
     private Project project;
     private TextView titleText;
@@ -67,5 +74,24 @@ public class ProjectView extends SciProActivity {
         infoText.setText(projectInfo);
     }
     
-    
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return MenuHelper.openActivityFromMenuItem(this, item);
+    }
 }
