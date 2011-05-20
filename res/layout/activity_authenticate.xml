@@ -8,8 +8,10 @@
     >
     <ImageView
         android:id="@+id/scipro_logo"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="48px"
+        android:layout_width="48px"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
         android:src="@drawable/icon_retina"
         android:layout_centerHorizontal="true"
         />
@@ -18,13 +20,14 @@
         android:layout_below="@id/scipro_logo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
         >
         <TextView
             android:id="@+id/auth_username_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username:"
-            android:textColor="#ffffffff"
+            android:textColor="@color/white"
             android:layout_centerVertical="true"
             />
         <EditText
@@ -33,7 +36,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="Enter username"
-            android:layout_toRightOf="@id/auth_username_label"
+            android:layout_below="@id/auth_username_label"
             android:layout_centerVertical="true"
             />
         </RelativeLayout>
@@ -42,6 +45,7 @@
         android:layout_below="@id/auth_username_row"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
         >
         <TextView
             android:id="@+id/auth_password_label"
@@ -55,7 +59,8 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="Enter password"
-            android:layout_toRightOf="@id/auth_password_label"
+            android:layout_below="@id/auth_password_label"
+            android:password="true"
             />
         </RelativeLayout>
     <TextView
@@ -70,6 +75,8 @@
         android:layout_below="@id/auth_password_row"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:paddingBottom="6dip"
         >
         <TextView
             android:id="@+id/auth_apikey_label"
@@ -83,7 +90,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="Enter API-key"
-            android:layout_toRightOf="@id/auth_apikey_label"
+            android:layout_below="@id/auth_apikey_label"
             />
         </RelativeLayout>
     <Button
