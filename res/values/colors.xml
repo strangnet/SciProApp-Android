@@ -36,4 +36,5 @@
 	<color name="background_basic">#ffffffff</color>
 	<color name="background_default">#ffc3d1e2</color>
 	<color name="background_alt">#ffd7e0eb</color>
+    <color name="white">#ffffffff</color>
 </resources>
