@@ -2,5 +2,5 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
   	<item android:title="View" android:id="@+id/messages_context_view" />
-  	<item android:title="Delete" android:id="@+id/messages_context_delete" />
+  	<item android:title="Mark Read" android:id="@+id/messages_context_mark_read" />
 </menu>
