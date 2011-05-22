@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -27,49 +27,28 @@ public class Project implements Serializable, Comparable<Project> {
     private static int counter = 0;
     
     public static enum STATUS {
-        POSITIVE, NEUTRAL, NEGATIVE;        
+        NEEDHELP, NEUTRAL, FINE;
     }
     
-    private int id;
-    private ArrayList<User> members;
-    private String title;
-    private STATUS status;
+    public int id;
+    public List<User> projectMembers;
+    public List<User> projectReviewers;
+    public List<User> projectCoSupervisors;
+    public List<FinalSeminar> finalSeminars;
+    public String title;
+    public STATUS status;
+    public String statusMessage;
+    public String level;
+    public int projectProgress;
+
     
     public Project(String title) {
         this.title = title;
-        members = new ArrayList<User>();
+        projectMembers = new ArrayList<User>();
         id = counter++;
     }
 
-    public List<User> getMembers() {
-        return members;
-    }
-
-    public void setMembers(ArrayList<User> members) {
-        this.members = members;
-    }
-    
-    public void addMember(User user) {
-        members.add(user);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    
-    public STATUS getStatus() {
-        return status;
-    }
-    
-    public void setStatus(STATUS status) {
-        this.status = status;
-    }
-
     public int compareTo(Project another) {
-        return this.getStatus().compareTo(another.getStatus());
+        return this.status.compareTo(another.status);
     }
 }
