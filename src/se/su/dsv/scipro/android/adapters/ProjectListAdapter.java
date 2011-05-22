@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -16,11 +16,6 @@
 
 package se.su.dsv.scipro.android.adapters;
 
-import java.util.List;
-
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.dao.DaoUtils;
-import se.su.dsv.scipro.android.dao.Project;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +23,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.utils.DaoUtils;
+import se.su.dsv.scipro.android.dao.Project;
+
+import java.util.List;
 
 public class ProjectListAdapter extends BaseAdapter {
     
@@ -56,19 +56,19 @@ public class ProjectListAdapter extends BaseAdapter {
         TextView misc = (TextView) item.findViewById(R.id.project_list_item_misc);
         ImageView status = (ImageView) item.findViewById(R.id.project_list_item_status);
         
-        Project p = getItem(position);
-        title.setText(p.getTitle());
-        misc.setText(DaoUtils.projectMembersAsString(p));
-        switch (p.getStatus()) {
-        case NEGATIVE:
-            status.setImageResource(R.drawable.red_ball_small);
+        Project project = getItem(position);
+        title.setText(project.title);
+        misc.setText(DaoUtils.projectMembersAsString(project));
+        switch (project.status) {
+        case NEEDHELP:
+            status.setImageResource(R.drawable.red_ball_medium);
             break;
-        case POSITIVE:
-            status.setImageResource(R.drawable.green_ball_small);
+        case FINE:
+            status.setImageResource(R.drawable.green_ball_medium);
             break;
         case NEUTRAL:
         default:
-            status.setImageResource(R.drawable.yellow_ball_small);
+            status.setImageResource(R.drawable.yellow_ball_medium);
         }
         status.setAdjustViewBounds(true);
         
