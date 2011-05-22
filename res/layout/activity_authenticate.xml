@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
-        android:src="@drawable/icon_retina"
+        android:src="@drawable/login_logo"
         android:layout_centerHorizontal="true"
         />
 
