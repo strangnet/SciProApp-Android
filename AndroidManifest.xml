@@ -10,16 +10,12 @@
 <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7" />
 
 
-    <application android:name="SciProApplication" android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:name="SciProApplication" android:icon="@drawable/icon_android" android:label="@string/app_name">
         
         <activity 
         	android:name=".activity.SupervisorHome" 
         	android:label="@string/app_name"
         	android:theme="@style/Theme.SciPro">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -58,6 +54,12 @@
 			android:label="@string/title_messages"
         	android:theme="@style/Theme.SciPro">
 		</activity>
-    
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>
