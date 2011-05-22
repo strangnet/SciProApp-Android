@@ -19,7 +19,6 @@ package se.su.dsv.scipro.android.activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,11 +28,10 @@ import android.widget.ListView;
 import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.SciProApplication;
-import se.su.dsv.scipro.android.adapter.ProjectListAdapter;
+import se.su.dsv.scipro.android.adapters.ProjectListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
-import se.su.dsv.scipro.android.json.SciProJSON;
-import se.su.dsv.scipro.android.util.SciProUtils;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 public class SupervisorHome extends ListActivity implements IHeaderOnClick {
     
@@ -46,25 +44,21 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!SciProApplication.getInstance().authenticated()) {
-            Intent intent = new Intent(this, Authenticate.class);
-            startActivity(intent);
-        }
         setContentView(R.layout.activity_supervisor_home);
         
         setUpViews();
         adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
         setListAdapter(adapter);
-        
-        SciProJSON scpj = new SciProJSON();
-        String res = scpj.jsonAuth();
-        Log.i(TAG, String.valueOf(res.length()));
-        
+
     }
     
     @Override
     protected void onResume() {
         super.onResume();
+        if (!SciProApplication.getInstance().isAuthenticated()) {
+            Intent intent = new Intent(this, Authenticate.class);
+            startActivity(intent);
+        }
     }
 
     @Override

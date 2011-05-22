@@ -27,7 +27,7 @@ import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.os.Bundle;
 import android.widget.TextView;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
-import se.su.dsv.scipro.android.util.SciProUtils;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 public class PrivateMessageView extends Activity implements IHeaderOnClick {
 

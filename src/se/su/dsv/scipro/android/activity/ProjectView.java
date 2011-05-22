@@ -29,7 +29,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
-import se.su.dsv.scipro.android.util.SciProUtils;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 public class ProjectView extends Activity implements IHeaderOnClick {
     

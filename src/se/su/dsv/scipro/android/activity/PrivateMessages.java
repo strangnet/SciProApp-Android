@@ -20,7 +20,7 @@ import android.app.ListActivity;
 import android.view.*;
 import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.adapter.MessageListAdapter;
+import se.su.dsv.scipro.android.adapters.MessageListAdapter;
 import se.su.dsv.scipro.android.dummydata.DummyData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.ListView;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
-import se.su.dsv.scipro.android.util.SciProUtils;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 public class PrivateMessages extends ListActivity implements IHeaderOnClick {
 
