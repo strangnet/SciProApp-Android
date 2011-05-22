@@ -7,8 +7,8 @@
 		android:summary="The username used to log in to SciPro" />
 	<EditTextPreference
 		android:key="PREF_APIKEY"
-		android:title="SciPro Key"
-		android:summary="The key generated on the SciPro site" />
+		android:title="API-key"
+		android:summary="The API-key generated on the SciPro site" />
 	<PreferenceCategory
 		android:title="Push notification" />
 	<CheckBoxPreference

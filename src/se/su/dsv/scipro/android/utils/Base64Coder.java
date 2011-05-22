@@ -14,7 +14,7 @@
  * This module is provided "as is", without warranties of any kind.
  */
 
-package se.su.dsv.scipro.android.util;
+package se.su.dsv.scipro.android.utils;
 
 /**
  * A Base64 encoder/decoder.

@@ -1,4 +1,4 @@
-package se.su.dsv.scipro.android.util;
+package se.su.dsv.scipro.android.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

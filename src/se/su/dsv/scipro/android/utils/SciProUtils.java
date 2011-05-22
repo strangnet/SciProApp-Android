@@ -1,14 +1,14 @@
-package se.su.dsv.scipro.android.util;
+package se.su.dsv.scipro.android.utils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import se.su.dsv.scipro.android.activity.PrivateMessages;
+import se.su.dsv.scipro.android.activity.SupervisorHome;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import se.su.dsv.scipro.android.activity.PrivateMessages;
-import se.su.dsv.scipro.android.activity.SupervisorHome;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 public class SciProUtils {
     
