@@ -24,6 +24,7 @@ public class Preferences extends PreferenceActivity {
 
     public static final String PREF_USERNAME = "PREF_USERNAME";
     public static final String PREF_APIKEY = "PREF_APIKEY";
+    public static final String PREF_USERID = "PREF_USERID";
     public static final String PREF_PUSH = "PREF_PUSH";
     public static final String PREF_LOCATION = "PREF_LOCATION";
     
