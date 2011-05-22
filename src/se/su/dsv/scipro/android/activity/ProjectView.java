@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -49,28 +49,27 @@ public class ProjectView extends Activity implements IHeaderOnClick {
 
     private void setUpViews() {
         titleText = (TextView) findViewById(R.id.project_title);
-        titleText.setText(project.getTitle());
+        titleText.setText(project.title);
         ImageButton homeButton = (ImageButton) findViewById(R.id.header_home_btn);
         homeButton.setVisibility(View.VISIBLE);
         infoText = (TextView) findViewById(R.id.project_data_info);
         String projectInfo = "Member(s):\n";
-        for (User u : project.getMembers())
-            projectInfo += u.getName() + "\n";
+        for (User u : project.projectMembers)
+            projectInfo += u.name + "\n";
         projectInfo += "\nStatus: ";
-        Project.STATUS status = project.getStatus();
+        Project.STATUS status = project.status;
         switch (status) {
-        case NEGATIVE:
-            projectInfo += "Negative\n";
+        case NEEDHELP:
+            projectInfo += "Need help.\n";
             break;
-        case POSITIVE:
-            projectInfo += "Positive\n";
+        case FINE:
+            projectInfo += "Feeling fine.\n";
             break;
         case NEUTRAL:
         default:
-            projectInfo += "Neutral\n";
+            projectInfo += "Neutral.\n";
         }
         
-        projectInfo += "\nNo new Message Board Messages.";
         infoText.setText(projectInfo);
     }
     

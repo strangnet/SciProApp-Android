@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -17,6 +17,7 @@
 package se.su.dsv.scipro.android.activity;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,16 +30,17 @@ import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.SciProApplication;
 import se.su.dsv.scipro.android.adapters.ProjectListAdapter;
-import se.su.dsv.scipro.android.dummydata.DummyData;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.tasks.GetProjectsAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
-public class SupervisorHome extends ListActivity implements IHeaderOnClick {
+public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetProjectsAsyncTask.ProjectsResponder {
     
     private static final int SHOW_PROJECT = 1;
     private static final String TAG = "SupervisorHome";
     
     private ProjectListAdapter adapter;
+    private ProgressDialog projectRetrievalInProgress;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +49,9 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick {
         setContentView(R.layout.activity_supervisor_home);
         
         setUpViews();
-        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
-        setListAdapter(adapter);
-
+//        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
+//        setListAdapter(adapter);
+        new GetProjectsAsyncTask(this).execute();
     }
     
     @Override
@@ -93,5 +95,18 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuHelper.openActivityFromMenuItem(this, item);
+    }
+
+    public void retrievingProjects() {
+        projectRetrievalInProgress = ProgressDialog.show(this,
+                "Loading Projects",
+                "Retrieving projects from SciPro");
+    }
+
+    public void retrievedProjects(GetProjectsAsyncTask.ProjectsResult result) {
+        projectRetrievalInProgress.dismiss();
+
+        adapter = new ProjectListAdapter(result.projects);
+        setListAdapter(adapter);
     }
 }
