@@ -17,11 +17,14 @@
 package se.su.dsv.scipro.android;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class SciProApplication extends Application {
 
     private static SciProApplication instance;
-    
+    private SharedPreferences preferences;
+
     public static SciProApplication getInstance() {
         return instance;
     }
@@ -30,9 +33,55 @@ public class SciProApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString(Preferences.PREF_USERNAME, "hhansson");
+//        editor.putString(Preferences.PREF_USERNAME, "patr-str");
+//        editor.putString(Preferences.PREF_APIKEY, "ryQzoxDsP/rvwD5H7ekt2ZLxLNs=");
+//        editor.putString(Preferences.PREF_APIKEY, "mFWsM/d7xif4/tc5ZRXoS9PMIUg=");
+//        editor.putLong(Preferences.PREF_USERID, 30);
+//        editor.putLong(Preferences.PREF_USERID, 6675);
+//        editor.commit();
     }
 
-    public boolean authenticated() {
-        return false;
+    public boolean isAuthenticated() {
+        return getUserId() != -1 && !getUsername().equals("") && !getApiKey().equals("");
+    }
+
+    public String getUsername() {
+        return preferences.getString(Preferences.PREF_USERNAME, null);
+    }
+
+    public void setUsername(String username) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Preferences.PREF_USERNAME, username);
+        editor.commit();
+    }
+
+    public String getApiKey() {
+        return preferences.getString(Preferences.PREF_APIKEY, null);
+    }
+
+    public void setApiKey(String apiKey) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Preferences.PREF_APIKEY, apiKey);
+        editor.commit();
+    }
+
+    public long getUserId() {
+        return preferences.getLong(Preferences.PREF_USERID, -1);
+    }
+
+    public void setUserid(long userid) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong(Preferences.PREF_USERID, userid);
+        editor.commit();
+    }
+
+    public void logout() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(Preferences.PREF_USERID).remove(Preferences.PREF_USERNAME).remove(Preferences.PREF_APIKEY);
+        editor.commit();
     }
 }
