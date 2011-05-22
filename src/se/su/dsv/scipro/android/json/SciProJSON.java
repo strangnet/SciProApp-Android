@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -31,9 +31,11 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import se.su.dsv.scipro.android.SciProApplication;
+import se.su.dsv.scipro.android.dao.User;
 import se.su.dsv.scipro.android.utils.StringUtils;
 
 import java.io.IOException;
@@ -143,6 +145,35 @@ public class SciProJSON {
         return result;
     }
 
+    public String sendMessage(String subject, String message, List<User> recipients) {
+        String uri = SCIPRO_JSON_ADDRESS + "message/send";
+
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("userid", String.valueOf(SciProApplication.getInstance().getUserId()));
+            jsonObj.put("apikey", SciProApplication.getInstance().getApiKey());
+            jsonObj.put("subject", subject);
+            jsonObj.put("message", message);
+
+            List<Long> idList = new ArrayList<Long>();
+            for (User u : recipients) {
+                idList.add(u.id);
+            }
+            JSONArray idArray = new JSONArray(idList);
+            jsonObj.put("toUserIdArray", idArray);
+        } catch (JSONException e) {
+            Log.e(TAG, "JSONException: " + e);
+        }
+
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("json", jsonObj.toString()));
+
+        String result = getJson(uri, postParams);
+
+        return result;
+    }
+
     private String getJson(String uri, List<NameValuePair> postParams) {
         String result = "";
         HttpPost httpPost = new HttpPost(uri);
@@ -173,4 +204,6 @@ public class SciProJSON {
 
         return result;
     }
+
+
 }
