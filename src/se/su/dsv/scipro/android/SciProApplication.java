@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -19,11 +19,19 @@ package se.su.dsv.scipro.android;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import se.su.dsv.scipro.android.dao.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SciProApplication extends Application {
 
     private static SciProApplication instance;
     private SharedPreferences preferences;
+
+    private Map<Long, User> userMap = new HashMap<Long, User>();
 
     public static SciProApplication getInstance() {
         return instance;
@@ -34,15 +42,6 @@ public class SciProApplication extends Application {
         super.onCreate();
         instance = this;
         preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putString(Preferences.PREF_USERNAME, "hhansson");
-//        editor.putString(Preferences.PREF_USERNAME, "patr-str");
-//        editor.putString(Preferences.PREF_APIKEY, "ryQzoxDsP/rvwD5H7ekt2ZLxLNs=");
-//        editor.putString(Preferences.PREF_APIKEY, "mFWsM/d7xif4/tc5ZRXoS9PMIUg=");
-//        editor.putLong(Preferences.PREF_USERID, 30);
-//        editor.putLong(Preferences.PREF_USERID, 6675);
-//        editor.commit();
     }
 
     public boolean isAuthenticated() {
@@ -83,5 +82,15 @@ public class SciProApplication extends Application {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(Preferences.PREF_USERID).remove(Preferences.PREF_USERNAME).remove(Preferences.PREF_APIKEY);
         editor.commit();
+    }
+
+    public List<User> getUsers() {
+        return new ArrayList<User>(userMap.values());
+    }
+
+    public void addUser(User user) {
+        if (userMap == null)
+            userMap = new HashMap<Long, User>();
+        userMap.put(user.id, user);
     }
 }
