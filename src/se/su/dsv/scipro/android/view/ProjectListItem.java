@@ -1,13 +1,13 @@
 /*
- * Copyright (C) 2011 Patrick Strang
+ * Copyright (c) 2011 Patrick Strang.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at 
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and 
@@ -16,15 +16,14 @@
 
 package se.su.dsv.scipro.android.view;
 
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.dao.DaoUtils;
-import se.su.dsv.scipro.android.dao.Project;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.utils.DaoUtils;
+import se.su.dsv.scipro.android.dao.Project;
 
 public class ProjectListItem extends LinearLayout {
 
@@ -43,19 +42,19 @@ public class ProjectListItem extends LinearLayout {
 
     public void setProject(Project project) {
         this.project = project;
-        textView.setText(project.getTitle());
+        textView.setText(project.title);
         String miscText = DaoUtils.projectMembersAsString(project);
 //        miscTextView.setText("Member(s): " + miscText);
-        switch (project.getStatus()) {
-        case NEGATIVE:
-            statusImage.setImageResource(R.drawable.red_ball_small);
+        switch (project.status) {
+        case NEEDHELP:
+            statusImage.setImageResource(R.drawable.red_ball_medium);
             break;
-        case POSITIVE:
-            statusImage.setImageResource(R.drawable.green_ball_small);
+        case FINE:
+            statusImage.setImageResource(R.drawable.green_ball_medium);
             break;
         case NEUTRAL:
         default:
-            statusImage.setImageResource(R.drawable.yellow_ball_small);
+            statusImage.setImageResource(R.drawable.yellow_ball_medium);
         }
         //statusImage.setAdjustViewBounds(true);
     }
