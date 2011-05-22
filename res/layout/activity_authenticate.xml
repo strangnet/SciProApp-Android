@@ -1,83 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/su_blue_1"
-    >
-    <ImageView
-        android:id="@+id/scipro_logo"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:src="@drawable/login_logo"
-        android:layout_centerHorizontal="true"
-        />
-
-    <TextView
-        android:id="@+id/auth_username_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username:"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_below="@id/scipro_logo"
-        />
-    <EditText
-        android:id="@+id/auth_username_entry"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:hint="Enter username"
-        android:layout_below="@id/auth_username_label"
-        android:autoText="false"
-        />
+        android:background="@color/su_blue_1">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/su_blue_1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
-    <TextView
-        android:id="@+id/auth_password_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password:"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_below="@id/auth_username_entry"
-        />
-    <EditText
-        android:id="@+id/auth_password_entry"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:hint="Enter password"
-        android:layout_below="@id/auth_password_label"
-        android:password="true"
-        />
+        <ImageView
+                android:id="@+id/scipro_logo"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:paddingTop="8dip"
+                android:paddingBottom="8dip"
+                android:src="@drawable/login_logo"
+                android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/auth_apikey_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="API-key:"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_below="@id/auth_password_entry"
-        />
-    <EditText
-        android:id="@+id/auth_apikey_entry"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:hint="Enter API-key"
-        android:layout_below="@id/auth_apikey_label"
-        />
+        <TextView
+                android:id="@+id/auth_username_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username:"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_below="@id/scipro_logo"/>
+        <EditText
+                android:id="@+id/auth_username_entry"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="Enter username"
+                android:layout_below="@id/auth_username_label"/>
 
-    <Button
-        android:id="@+id/auth_button"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Authenticate"
-        android:layout_below="@id/auth_apikey_entry"
-        android:layout_centerHorizontal="true"
-        />
-</RelativeLayout>
+        <TextView
+                android:id="@+id/auth_password_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password:"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_below="@id/auth_username_entry"/>
+        <EditText
+                android:id="@+id/auth_password_entry"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="Enter password"
+                android:layout_below="@id/auth_password_label"
+                android:password="true"/>
+
+        <TextView
+                android:id="@+id/auth_apikey_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="API-key:"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_below="@id/auth_password_entry"/>
+        <EditText
+                android:id="@+id/auth_apikey_entry"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:hint="Enter API-key"
+                android:layout_below="@id/auth_apikey_label"/>
+
+        <Button
+                android:id="@+id/auth_button"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Authenticate"
+                android:layout_below="@id/auth_apikey_entry"
+                android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</ScrollView>

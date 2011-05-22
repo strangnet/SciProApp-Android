@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@id/header_logo"
-            android:src="@drawable/ic_header_home"
+            android:src="@drawable/ic_tab_home"
             android:background="@drawable/header_btn"
             android:visibility="gone"
             android:onClick="onHeaderHomeClick"/>
@@ -46,7 +46,18 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_tab_message_unselected"
+            android:src="@drawable/ic_tab_message"
             android:background="@drawable/header_btn"
             android:onClick="onHeaderMessagesClick"/>
+    <ImageButton
+            android:id="@+id/header_new_message_btn"
+            android:layout_width="@dimen/header_size"
+            android:layout_height="fill_parent"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_tab_new_message"
+            android:background="@drawable/header_btn"
+            android:visibility="gone" />
 </RelativeLayout>

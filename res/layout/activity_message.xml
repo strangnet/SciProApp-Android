@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<TextView 
-		android:textStyle="bold" 
-		android:layout_height="wrap_content" 
-		android:text="Message Subject" 
-		android:layout_width="fill_parent" 
-		android:padding="5dip"
-		android:paddingBottom="4dip" 
-		android:textSize="16dip" 
-		android:id="@+id/message_subject" 
-		android:layout_alignParentLeft="true" />
-	<TextView
-		android:layout_height="wrap_content" 
-		android:text="[From]" 
-		android:layout_width="fill_parent" 
-		android:id="@+id/message_from"
-		android:textSize="14dip"
-		android:padding="5dip"
-		android:layout_below="@id/message_subject" />
-	<TextView
-		android:text="[Message]" 
-		android:layout_width="fill_parent" 
-		android:id="@+id/message_text"
-		android:layout_below="@id/message_from" 
-		android:layout_height="fill_parent"
-		android:paddingTop="12dip"
-		android:paddingLeft="4dip"
-		android:paddingRight="4dip"
-		android:textSize="14dip" />
-	<Button 
-		android:text="Reply" 
-		android:layout_height="wrap_content" 
-		android:layout_width="wrap_content" 
-		android:id="@+id/reply_message_button" 
-		android:layout_alignParentBottom="true" />
-	<Button 
-		android:text="Delete" 
-		android:layout_height="wrap_content" 
-		android:layout_width="wrap_content" 
-		android:id="@+id/delete_message_button" 
-		android:layout_alignParentBottom="true"
-		android:layout_toRightOf="@id/reply_message_button" />
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <include layout="@layout/header" android:id="@+id/header"/>
+    <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Message Subject"
+            android:layout_width="fill_parent"
+            android:padding="5dip"
+            android:paddingBottom="4dip"
+            android:textSize="16dip"
+            android:id="@+id/message_subject"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/header"/>
+    <TextView
+            android:layout_height="wrap_content"
+            android:text="[From]"
+            android:layout_width="fill_parent"
+            android:id="@+id/message_from"
+            android:textSize="14dip"
+            android:padding="5dip"
+            android:layout_below="@id/message_subject"/>
+    <TextView
+            android:text="[Message]"
+            android:layout_width="fill_parent"
+            android:id="@+id/message_text"
+            android:layout_below="@id/message_from"
+            android:layout_height="fill_parent"
+            android:paddingTop="12dip"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:textSize="14dip"/>
+    <Button
+            android:text="Reply"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/reply_message_button"
+            android:layout_alignParentBottom="true"/>
+    <Button
+            android:text="Delete"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/delete_message_button"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/reply_message_button"/>
 </RelativeLayout>
