@@ -37,12 +37,4 @@ public class SciProUtils {
         
         return "";
     }
-    
-    public static String apiKeyGen(String username) {
-        String timehash = hash(String.valueOf(System.currentTimeMillis()));
-        String salthash = hash("armysurplusst0re");
-        String seed = username + salthash + timehash;
-        String apikey = hash(seed);
-        return apikey;
-    }
 }
