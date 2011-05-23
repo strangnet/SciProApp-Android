@@ -33,9 +33,9 @@ public class MenuHelper {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.preferences_menu_item:
-                    intent = new Intent(context, Preferences.class);
-                    context.startActivity(intent);
-                    return true;
+                intent = new Intent(context, Preferences.class);
+                context.startActivity(intent);
+                return true;
             case R.id.logout_menu_item:
                 SciProApplication.getInstance().logout();
                 intent = new Intent(context, MainActivity.class);

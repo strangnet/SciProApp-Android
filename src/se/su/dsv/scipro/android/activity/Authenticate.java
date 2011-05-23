@@ -73,6 +73,12 @@ public class Authenticate extends Activity implements LoginResponder {
         authenticateInfoDialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
     private void setUpViews() {
         usernameText = (TextView) findViewById(R.id.auth_username_entry);
         passwordText = (TextView) findViewById(R.id.auth_password_entry);

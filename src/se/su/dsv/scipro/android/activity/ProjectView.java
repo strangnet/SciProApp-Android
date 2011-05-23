@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.FinalSeminar;
 import se.su.dsv.scipro.android.dao.Project;
 import se.su.dsv.scipro.android.dao.User;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import se.su.dsv.scipro.android.helpers.MenuHelper;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
 public class ProjectView extends Activity implements IHeaderOnClick {
-    
+
     private Project project;
     private TextView titleText;
     private TextView infoText;
@@ -43,7 +44,7 @@ public class ProjectView extends Activity implements IHeaderOnClick {
         Bundle bundle = getIntent().getExtras();
         project = (Project) bundle.getSerializable("project");
         setContentView(R.layout.activity_project);
-        
+
         setUpViews();
     }
 
@@ -59,20 +60,43 @@ public class ProjectView extends Activity implements IHeaderOnClick {
         projectInfo += "\nStatus: ";
         Project.STATUS status = project.status;
         switch (status) {
-        case NEEDHELP:
-            projectInfo += "Need help.\n";
-            break;
-        case FINE:
-            projectInfo += "Feeling fine.\n";
-            break;
-        case NEUTRAL:
-        default:
-            projectInfo += "Neutral.\n";
+            case NEEDHELP:
+                projectInfo += "Need help.\n";
+                break;
+            case FINE:
+                projectInfo += "Feeling fine.\n";
+                break;
+            case NEUTRAL:
+            default:
+                projectInfo += "Neutral.\n";
         }
-        
+
+        projectInfo += "\nCo-Supervisors:\n";
+        for (User u : project.projectCoSupervisors) {
+            projectInfo += u.name + "\n";
+        }
+
+        projectInfo += "\nReviewers:\n";
+        for (User u : project.projectReviewers) {
+            projectInfo += u.name + "\n";
+        }
+
+        projectInfo += "\nFinal Seminars:\n";
+        for (FinalSeminar f : project.finalSeminars) {
+            projectInfo += f.date + " in room " + f.room + "\n";
+            projectInfo += "Opponents:\n";
+            for (User u : f.opponents) {
+                projectInfo += u.name + "\n";
+            }
+            projectInfo += "Active Listeners:\n";
+            for (User u : f.activeListeners) {
+                projectInfo += u.name + "\n";
+            }
+        }
+
         infoText.setText(projectInfo);
     }
-    
+
     public void onHeaderHomeClick(View v) {
         SciProUtils.openHomeActivity(this);
     }

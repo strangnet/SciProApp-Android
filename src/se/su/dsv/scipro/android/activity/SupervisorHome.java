@@ -51,7 +51,11 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         setUpViews();
 //        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
 //        setListAdapter(adapter);
-        new GetProjectsAsyncTask(this).execute();
+        if (SciProApplication.getInstance().getProjects().size() == 0) {
+            new GetProjectsAsyncTask(this).execute();
+        } else {
+            initListAdapter();
+        }
     }
     
     @Override
@@ -69,6 +73,11 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         Intent intent = new Intent(this, ProjectView.class);
         intent.putExtra("project", adapter.getItem(position));
         startActivityForResult(intent, SHOW_PROJECT);
+    }
+
+    public void initListAdapter() {
+        adapter = new ProjectListAdapter(SciProApplication.getInstance().getProjects());
+        setListAdapter(adapter);
     }
 
     private void setUpViews() {
@@ -105,8 +114,7 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
     public void retrievedProjects(GetProjectsAsyncTask.ProjectsResult result) {
         projectRetrievalInProgress.dismiss();
-
-        adapter = new ProjectListAdapter(result.projects);
-        setListAdapter(adapter);
+        SciProApplication.getInstance().setProjects(result.projects);
+        initListAdapter();
     }
 }

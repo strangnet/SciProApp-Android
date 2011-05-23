@@ -46,7 +46,8 @@ import java.util.List;
 
 public class SciProJSON {
     
-    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.2:8080/SciPro/json/";
+//    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.2:8080/SciPro/json/";
+    private static final String SCIPRO_JSON_ADDRESS = "http://130.237.157.173:8080/SciPro/json/";
     private static final String TAG = "SciProJSON";
 
     private static SciProJSON instance;

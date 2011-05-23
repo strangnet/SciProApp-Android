@@ -48,7 +48,7 @@
             android:layout_alignParentBottom="true"
             android:src="@drawable/ic_tab_message"
             android:background="@drawable/header_btn"
-            android:onClick="onHeaderMessagesClick"/>
+            android:onClick="onHeaderMessagesClick" />
     <ImageButton
             android:id="@+id/header_new_message_btn"
             android:layout_width="@dimen/header_size"

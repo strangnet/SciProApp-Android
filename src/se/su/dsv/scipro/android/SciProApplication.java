@@ -19,7 +19,10 @@ package se.su.dsv.scipro.android;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import se.su.dsv.scipro.android.dao.Project;
 import se.su.dsv.scipro.android.dao.User;
+import se.su.dsv.scipro.android.utils.DaoUtils;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,9 @@ public class SciProApplication extends Application {
     private SharedPreferences preferences;
 
     private Map<Long, User> userMap = new HashMap<Long, User>();
+    private List<Project> projects = new ArrayList<Project>();
+
+    private boolean serviceRunning;
 
     public static SciProApplication getInstance() {
         return instance;
@@ -82,6 +88,8 @@ public class SciProApplication extends Application {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(Preferences.PREF_USERID).remove(Preferences.PREF_USERNAME).remove(Preferences.PREF_APIKEY);
         editor.commit();
+        SciProApplication.getInstance().setProjects(new ArrayList<Project>());
+        DaoUtils.addUsersToApplication(new ArrayList<User>());
     }
 
     public List<User> getUsers() {
@@ -92,5 +100,21 @@ public class SciProApplication extends Application {
         if (userMap == null)
             userMap = new HashMap<Long, User>();
         userMap.put(user.id, user);
+    }
+
+    public boolean isServiceRunning() {
+        return serviceRunning;
+    }
+
+    public void setServiceRunning(boolean serviceRunning) {
+        this.serviceRunning = serviceRunning;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

@@ -21,6 +21,8 @@
 			android:layout_height="30dip"
 			android:textSize="@dimen/font_size_medium"
             android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:lines="1"
 			android:textStyle="bold"
 			android:gravity="center_vertical" />
 		<TextView 

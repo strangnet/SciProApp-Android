@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-    <include layout="@layout/header"/>
-    <LinearLayout
+        android:layout_height="fill_parent">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp">
-        <TextView
-                android:id="@+id/project_title"
-                android:textStyle="bold"
-                android:layout_height="wrap_content"
-                android:text="[Project Title]"
+            android:orientation="vertical">
+        <include layout="@layout/header" android:id="@+id/header"/>
+        <RelativeLayout
                 android:layout_width="fill_parent"
-                android:textSize="@dimen/font_size_medium"
-                android:layout_alignParentLeft="true"/>
-        <TextView
-                android:id="@+id/project_data_info"
-                android:layout_height="wrap_content"
-                android:text="[Project Info]"
-                android:layout_width="fill_parent"
-                android:paddingTop="8dip"
-                android:layout_alignParentLeft="true"
-                android:textSize="14dip"/>
-    </LinearLayout>
-</LinearLayout>
+                android:layout_height="fill_parent"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_below="@id/header">
+            <TextView
+                    android:id="@+id/project_title"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="[Project Title]"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/font_size_medium"
+                    android:layout_alignParentLeft="true"/>
+            <TextView
+                    android:id="@+id/project_data_info"
+                    android:layout_height="wrap_content"
+                    android:text="[Project Info]"
+                    android:layout_width="fill_parent"
+                    android:paddingTop="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="14dp"
+                    android:layout_below="@id/project_title"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

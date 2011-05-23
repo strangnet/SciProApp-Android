@@ -16,6 +16,8 @@
 
 package se.su.dsv.scipro.android.view;
 
+import android.R;
+import android.graphics.Typeface;
 import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -38,6 +40,7 @@ public class MessageListItem extends LinearLayout {
     public void setMessage(PrivateMessage message) {
         this.message = message;
         textView.setText(message.subject);
+        textView.setTypeface(null, Typeface.BOLD);
     }
 
     @Override

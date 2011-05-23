@@ -61,5 +61,7 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".services.UpdaterService" />
+
     </application>
 </manifest>
