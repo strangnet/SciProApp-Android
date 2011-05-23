@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="se.su.dsv.scipro.android"
-      android:versionCode="10"
-      android:versionName="0.10">
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.VIBRATE" />
-<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7" />
+          package="se.su.dsv.scipro.android"
+          android:versionCode="10"
+          android:versionName="0.10">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7"/>
 
 
-    <application android:name="SciProApplication" android:icon="@drawable/icon_android" android:label="@string/app_name">
-        
-        <activity 
-        	android:name=".activity.SupervisorHome" 
-        	android:label="@string/app_name"
-        	android:theme="@style/Theme.SciPro">
+    <application android:name="SciProApplication" android:icon="@drawable/icon_android"
+                 android:label="@string/app_name">
+
+        <activity
+                android:name=".activity.SupervisorHome"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.SciPro">
         </activity>
 
         <activity
-            android:name=".activity.Authenticate"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.SciPro">
+                android:name=".activity.Authenticate"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.SciPro">
 
         </activity>
 
-        <activity 
-			android:name=".activity.NewMessage" 
-			android:label="@string/title_new_message"
-        	android:theme="@style/Theme.SciPro">
-		</activity>
-		
-		<activity 
-			android:name=".Preferences" 
-			android:label="@string/title_preferences"
-        	android:theme="@style/Theme.SciPro">
-		</activity>
-		
-		<activity 
-			android:name=".activity.ProjectView" 
-			android:label="@string/title_project"
-        	android:theme="@style/Theme.SciPro">
-		</activity>
-		
-		<activity 
-			android:name=".activity.PrivateMessageView" 
-			android:label="@string/title_message"
-        	android:theme="@style/Theme.SciPro">
-		</activity>
-		
-		<activity 
-			android:name=".activity.PrivateMessages" 
-			android:label="@string/title_messages"
-        	android:theme="@style/Theme.SciPro">
-		</activity>
+        <activity
+                android:name=".activity.NewMessage"
+                android:label="@string/title_new_message"
+                android:theme="@style/Theme.SciPro">
+        </activity>
+
+        <activity
+                android:name=".Preferences"
+                android:label="@string/title_preferences"
+                android:theme="@style/Theme.SciPro">
+        </activity>
+
+        <activity
+                android:name=".activity.ProjectView"
+                android:label="@string/title_project"
+                android:theme="@style/Theme.SciPro">
+        </activity>
+
+        <activity
+                android:name=".activity.PrivateMessageView"
+                android:label="@string/title_message"
+                android:theme="@style/Theme.SciPro">
+        </activity>
+
+        <activity
+                android:name=".activity.PrivateMessages"
+                android:label="@string/title_messages"
+                android:theme="@style/Theme.SciPro">
+        </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -61,7 +64,13 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.UpdaterService" />
+        <activity
+                android:name=".activity.StatusCheckIn"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.SciPro"/>
+
+        <service android:name=".services.UpdaterService"/>
+        <service android:name=".services.LocationService"/>
 
     </application>
 </manifest>

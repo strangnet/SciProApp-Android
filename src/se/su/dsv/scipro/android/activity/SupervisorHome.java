@@ -31,6 +31,7 @@ import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.SciProApplication;
 import se.su.dsv.scipro.android.adapters.ProjectListAdapter;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.services.LocationService;
 import se.su.dsv.scipro.android.tasks.GetProjectsAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
@@ -65,6 +66,7 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
             Intent intent = new Intent(this, Authenticate.class);
             startActivity(intent);
         }
+        startService(new Intent(this, LocationService.class));
     }
 
     @Override
