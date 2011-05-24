@@ -146,7 +146,7 @@ public class SciProJSON {
         return result;
     }
 
-    public String sendMessage(String subject, String message, List<User> recipients) {
+    public String sendMessage(String subject, String message, User recipient) {
         String uri = SCIPRO_JSON_ADDRESS + "message/send";
 
         JSONObject jsonObj = new JSONObject();
@@ -158,9 +158,7 @@ public class SciProJSON {
             jsonObj.put("message", message);
 
             List<Long> idList = new ArrayList<Long>();
-            for (User u : recipients) {
-                idList.add(u.id);
-            }
+            idList.add(recipient.id);
             JSONArray idArray = new JSONArray(idList);
             jsonObj.put("toUserIdArray", idArray);
         } catch (JSONException e) {

@@ -45,7 +45,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
 
     public static final String TAG = "NewMessage";
 
-    private MultiAutoCompleteTextView recipientField;
+    private AutoCompleteTextView recipientField;
     private TextView subjectField;
     private EditText messageTextField;
     private Button submitButton;
@@ -56,7 +56,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
     protected boolean changesPending;
     private AlertDialog unsavedChangesDialog;
     private ArrayAdapter<User> adapter;
-    private List<User> selectedRecipients = new ArrayList<User>();
+    private User selectedRecipient = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
     }
 
     private void setUpViews() {
-        recipientField = (MultiAutoCompleteTextView) findViewById(R.id.to_edit);
+        recipientField = (AutoCompleteTextView) findViewById(R.id.to_edit);
         subjectField = (TextView) findViewById(R.id.subject_edit);
         messageTextField = (EditText) findViewById(R.id.message_edit);
         submitButton = (Button) findViewById(R.id.send_message);
@@ -123,7 +123,6 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
         adapter = new ArrayAdapter<User>(this,
                 android.R.layout.simple_dropdown_item_1line, SciProApplication.getInstance().getUsers());
         recipientField.setAdapter(adapter);
-        recipientField.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         recipientField.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -141,7 +140,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User u = (User) (parent.getItemAtPosition(position));
                 Log.d(TAG, "Added " + u.name + " to list");
-                selectedRecipients.add(u);
+                selectedRecipient = u;
             }
         });
 
@@ -170,7 +169,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
                     new SendMessageAsyncTask(NewMessage.this,
                             subjectField.getText().toString(),
                             messageTextField.getText().toString(),
-                            selectedRecipients)
+                            selectedRecipient)
                             .execute();
                 } else {
 

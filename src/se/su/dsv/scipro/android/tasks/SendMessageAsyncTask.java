@@ -51,18 +51,18 @@ public class SendMessageAsyncTask extends AsyncTask<Void, Void, SendMessageAsync
     private SentMessageResponder responder;
     private String subject;
     private String message;
-    private List<User> recipients;
+    private User recipient;
 
-    public SendMessageAsyncTask(SentMessageResponder responder, String subject, String message, List<User> recipients) {
+    public SendMessageAsyncTask(SentMessageResponder responder, String subject, String message, User recipient) {
         this.responder = responder;
         this.subject = subject;
         this.message = message;
-        this.recipients = recipients;
+        this.recipient = recipient;
     }
 
     @Override
     protected SentMessageResult doInBackground(Void... params) {
-        String response = SciProJSON.getInstance().sendMessage(subject, message, recipients);
+        String response = SciProJSON.getInstance().sendMessage(subject, message, recipient);
 
         boolean authenticated = true;
 
