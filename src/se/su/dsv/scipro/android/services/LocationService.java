@@ -43,6 +43,14 @@ public class LocationService extends Service {
     private static final float DSV_LONGITUDE = (float) 17.94446;
     private static final float DSV_LATITUDE = (float) 59.40540;
 
+    private static final int MINIMUM_LOCATION_UPDATE_TIME = 60000;
+    private static final float MINIMUM_LOCATION_UPDATE_DISTANCE = 10;
+
+    private static final String PROXIMITY_ALERT = "se.su.dsv.scipro.android.ProximityAlert";
+
+    private static final float PROXIMITY_RADIUS = 200;
+    private static final long NO_EXPIRATION_TIME = -1;
+
     private LocationManager locationManager;
 
     @Override
@@ -54,7 +62,9 @@ public class LocationService extends Service {
 
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                2000, 5, new MyLocationListener());
+                MINIMUM_LOCATION_UPDATE_TIME,
+                MINIMUM_LOCATION_UPDATE_DISTANCE,
+                new MyLocationListener());
 
         saveProximityLocation();
     }
@@ -65,12 +75,17 @@ public class LocationService extends Service {
     }
 
     private void addProximityAlert() {
-        Intent intent = new Intent("se.su.dsv.scipro.android.ProximityAlert");
+        Intent intent = new Intent(PROXIMITY_ALERT);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        locationManager.addProximityAlert(DSV_LATITUDE, DSV_LONGITUDE, 250, -1, pendingIntent);
+        locationManager.addProximityAlert(
+                DSV_LATITUDE,
+                DSV_LONGITUDE,
+                PROXIMITY_RADIUS,
+                NO_EXPIRATION_TIME,
+                pendingIntent);
 
-        IntentFilter filter = new IntentFilter("se.su.dsv.scipro.android.ProximityAlert");
+        IntentFilter filter = new IntentFilter(PROXIMITY_ALERT);
         registerReceiver(new LocationIntentReceiver(), filter);
     }
 

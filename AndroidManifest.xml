@@ -36,8 +36,7 @@
 
         <activity
                 android:name=".Preferences"
-                android:label="@string/title_preferences"
-                android:theme="@style/Theme.SciPro">
+                android:label="@string/title_preferences">
         </activity>
 
         <activity

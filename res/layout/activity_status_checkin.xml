@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2011 Patrick Strang.
   ~
@@ -15,15 +14,39 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-
+    <include layout="@layout/header" android:id="@+id/header"/>
     <TextView
-        android:id="@+id/status_title"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Status Check-in" />
+            android:id="@+id/status_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Check in @DSV"
+            android:layout_below="@id/header" />
+    <CheckBox
+            android:id="@+id/checkin_checkbox"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/status_title"
+            android:text="Check In"/>
+    <TextView
+            android:id="@+id/checkin_status_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkin_checkbox"
+            android:text="Status message:" />
+    <EditText
+            android:id="@+id/checkin_status_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkin_status_label"
+            android:hint="Enter an optional status message"/>
+    <Button
+            android:id="@+id/checkin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkin_status_text"
+            android:text="Check in"/>
 </RelativeLayout>

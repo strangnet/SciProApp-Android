@@ -50,6 +50,7 @@ public class LocationIntentReceiver extends BroadcastReceiver {
             Log.d(TAG, "Leaving");
         }
 
+
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -57,10 +58,26 @@ public class LocationIntentReceiver extends BroadcastReceiver {
 
         Notification notification = createNotification();
 
-        notification.setLatestEventInfo(context, "Location Proximity", "You are close to DSV. Click to check in and set status.", pendingIntent);
+        String notificationTitle = "";
+        String notificationText = "";
+
+        if (entering) {
+            notificationTitle = "Entering DSV";
+            notificationText = "You are entering the proximity of DSV. Click to change your SciPro status.";
+        } else {
+            notificationTitle = "Leaving DSV";
+            notificationText = "You are leaving the proximity of DSV. Click to change your SciPro status.";
+        }
+
+
+        notification.setLatestEventInfo(context,
+                notificationTitle,
+                notificationText,
+                pendingIntent);
 
         notificationManager.notify(NOTIFICATION_ID, notification);
     }
+
 
     private Notification createNotification() {
         Notification notification = new Notification();
@@ -69,6 +86,8 @@ public class LocationIntentReceiver extends BroadcastReceiver {
         notification.when = System.currentTimeMillis();
 
         notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
         return notification;
     }
