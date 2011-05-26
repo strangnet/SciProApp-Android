@@ -76,7 +76,7 @@ public class Authenticate extends Activity implements LoginResponder {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        finish();
     }
 
     private void setUpViews() {

@@ -47,4 +47,9 @@ public class MainActivity extends Activity {
             finish();
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

@@ -38,8 +38,11 @@ public class LocationIntentReceiver extends BroadcastReceiver {
 
     private static final int NOTIFICATION_ID = 4711;
 
+    private boolean hasEnabledLocationAwareSetting;
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
         String key = LocationManager.KEY_PROXIMITY_ENTERING;
 
         boolean entering = intent.getBooleanExtra(key, false);

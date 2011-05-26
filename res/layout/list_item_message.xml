@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<se.su.dsv.scipro.android.view.MessageListItem
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<TextView
-		android:id="@android:id/text1"
-		android:layout_width="fill_parent"
-		android:layout_height="?android:attr/listPreferredItemHeight"
-		android:paddingLeft="10dip"
-		android:paddingRight="10dip"
-		android:paddingTop="8dip"
-		android:paddingBottom="8dip"
-		android:gravity="center_vertical" />
-</se.su.dsv.scipro.android.view.MessageListItem>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <TextView
+                android:id="@+id/list_item_message_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="marquee" />
+        <TextView
+                android:id="@+id/list_item_message_date"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</ScrollView>

@@ -49,6 +49,11 @@ public class Project implements Serializable, Comparable<Project> {
     }
 
     public int compareTo(Project another) {
-        return this.status.compareTo(another.status);
+        if (status.ordinal() == another.status.ordinal())
+            return 0;
+        else if (status.ordinal() > another.status.ordinal())
+            return 1;
+        else
+            return -1;
     }
 }

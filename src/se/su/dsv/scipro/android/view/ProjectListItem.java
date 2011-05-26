@@ -21,8 +21,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.utils.DaoUtils;
 import se.su.dsv.scipro.android.dao.Project;
 
 public class ProjectListItem extends LinearLayout {
@@ -42,28 +40,13 @@ public class ProjectListItem extends LinearLayout {
 
     public void setProject(Project project) {
         this.project = project;
-        textView.setText(project.title);
-        String miscText = DaoUtils.projectMembersAsString(project);
-//        miscTextView.setText("Member(s): " + miscText);
-        switch (project.status) {
-        case NEEDHELP:
-            statusImage.setImageResource(R.drawable.red_ball_medium);
-            break;
-        case FINE:
-            statusImage.setImageResource(R.drawable.green_ball_medium);
-            break;
-        case NEUTRAL:
-        default:
-            statusImage.setImageResource(R.drawable.yellow_ball_medium);
-        }
-        //statusImage.setAdjustViewBounds(true);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        textView = (TextView) findViewById(android.R.id.text1);
-        statusImage = (ImageView) findViewById(R.id.project_list_item_status);
+//        textView = (TextView) findViewById(android.R.id.text1);
+//        statusImage = (ImageView) findViewById(R.id.project_list_item_status);
 //        miscTextView = (TextView) findViewById(R.id.project_list_item_misc);
     }
 

@@ -16,18 +16,19 @@
 
 package se.su.dsv.scipro.android.view;
 
-import android.R;
-import android.graphics.Typeface;
-import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.dao.PrivateMessage;
 
-public class MessageListItem extends LinearLayout {
+public class MessageListItem extends RelativeLayout {
     
     private PrivateMessage message;
-    private TextView textView;
+    private TextView messageTitleTextView;
+    private TextView messageDateTextView;
 
     public MessageListItem(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,14 +40,18 @@ public class MessageListItem extends LinearLayout {
 
     public void setMessage(PrivateMessage message) {
         this.message = message;
-        textView.setText(message.subject);
-        textView.setTypeface(null, Typeface.BOLD);
+        messageTitleTextView.setText(message.subject);
+        if (!message.read) {
+            messageTitleTextView.setTypeface(null, Typeface.BOLD);
+        }
+        messageDateTextView.setText(message.date);
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        textView = (TextView) findViewById(android.R.id.text1);
+        messageTitleTextView = (TextView) findViewById(R.id.list_item_message_title);
+        messageDateTextView = (TextView) findViewById(R.id.list_item_message_date);
     }
 
 }

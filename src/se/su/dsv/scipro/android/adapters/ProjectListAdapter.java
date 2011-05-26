@@ -24,9 +24,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import se.su.dsv.scipro.android.R;
-import se.su.dsv.scipro.android.utils.DaoUtils;
 import se.su.dsv.scipro.android.dao.Project;
+import se.su.dsv.scipro.android.utils.DaoUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ProjectListAdapter extends BaseAdapter {
@@ -35,6 +36,7 @@ public class ProjectListAdapter extends BaseAdapter {
     
     public ProjectListAdapter(List<Project> projects) {
         this.projects = projects;
+        Collections.sort(projects);
     }
     
     public int getCount() {
@@ -55,22 +57,25 @@ public class ProjectListAdapter extends BaseAdapter {
         TextView title = (TextView) item.findViewById(R.id.project_list_item_title);
         TextView misc = (TextView) item.findViewById(R.id.project_list_item_misc);
         ImageView status = (ImageView) item.findViewById(R.id.project_list_item_status);
-        
+
         Project project = getItem(position);
         title.setText(project.title);
         misc.setText(DaoUtils.projectMembersAsString(project));
         switch (project.status) {
         case NEEDHELP:
             status.setImageResource(R.drawable.red_ball_medium);
+            item.setBackgroundColor(R.color.project_status_list_bg_red);
             break;
         case FINE:
             status.setImageResource(R.drawable.green_ball_medium);
+            item.setBackgroundColor(R.color.project_status_list_bg_green);
             break;
         case NEUTRAL:
         default:
             status.setImageResource(R.drawable.yellow_ball_medium);
+            item.setBackgroundColor(R.color.project_status_list_bg_yellow);
         }
-        status.setAdjustViewBounds(true);
+        //status.setAdjustViewBounds(true);
         
         return item;
     }

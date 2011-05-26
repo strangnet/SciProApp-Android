@@ -21,23 +21,19 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import se.su.dsv.scipro.android.dao.Project;
 import se.su.dsv.scipro.android.dao.User;
-import se.su.dsv.scipro.android.utils.DaoUtils;
-import se.su.dsv.scipro.android.utils.SciProUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SciProApplication extends Application {
+public class SciProApplication extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static SciProApplication instance;
     private SharedPreferences preferences;
 
     private Map<Long, User> userMap = new HashMap<Long, User>();
     private List<Project> projects = new ArrayList<Project>();
-
-    private boolean serviceRunning;
 
     public static SciProApplication getInstance() {
         return instance;
@@ -47,7 +43,8 @@ public class SciProApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        this.preferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     public boolean isAuthenticated() {
@@ -89,7 +86,7 @@ public class SciProApplication extends Application {
         editor.remove(Preferences.PREF_USERID).remove(Preferences.PREF_USERNAME).remove(Preferences.PREF_APIKEY);
         editor.commit();
         SciProApplication.getInstance().setProjects(new ArrayList<Project>());
-        DaoUtils.addUsersToApplication(new ArrayList<User>());
+        userMap = new HashMap<Long, User>();
     }
 
     public List<User> getUsers() {
@@ -102,19 +99,19 @@ public class SciProApplication extends Application {
         userMap.put(user.id, user);
     }
 
-    public boolean isServiceRunning() {
-        return serviceRunning;
-    }
-
-    public void setServiceRunning(boolean serviceRunning) {
-        this.serviceRunning = serviceRunning;
-    }
-
     public List<Project> getProjects() {
         return projects;
     }
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.remove(Preferences.PREF_USERID);
+//        editor.commit();
+//        projects = null;
+//        userMap = null;
     }
 }

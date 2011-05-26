@@ -53,7 +53,7 @@ public class PrivateMessages extends ListActivity implements IHeaderOnClick, Get
             startActivityForResult(intent, SHOW_MESSAGE);
             return true;
         case R.id.messages_context_mark_read:
-            adapter.deleteMessage(info.position);
+            adapter.setMessageRead(info.position);
             return true;
         default:
             return super.onContextItemSelected(item);

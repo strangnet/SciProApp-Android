@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.dao.PrivateMessage;
+import se.su.dsv.scipro.android.json.SciProJSON;
 import se.su.dsv.scipro.android.view.MessageListItem;
 
 import java.util.List;
@@ -61,9 +62,16 @@ public class MessageListAdapter extends BaseAdapter {
         return mli;
     }
 
-    public void deleteMessage(int position) {
-        messages.remove(getItem(position));
-        Toast toast = Toast.makeText(context, "Message deleted", 1500);
+    public void setMessageRead(int position) {
+        final PrivateMessage message = getItem(position);
+        message.read = true;
+        new Thread() {
+            @Override
+            public void run() {
+                SciProJSON.getInstance().setMessageRead(message);
+            }
+        }.start();
+        Toast toast = Toast.makeText(context, "Message marked as read", Toast.LENGTH_SHORT);
         toast.show();
         notifyDataSetChanged();
     }

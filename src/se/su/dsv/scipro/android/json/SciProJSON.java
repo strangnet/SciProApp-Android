@@ -35,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import se.su.dsv.scipro.android.SciProApplication;
+import se.su.dsv.scipro.android.dao.PrivateMessage;
 import se.su.dsv.scipro.android.dao.User;
 import se.su.dsv.scipro.android.utils.StringUtils;
 
@@ -46,8 +47,8 @@ import java.util.List;
 
 public class SciProJSON {
     
-//    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.2:8080/SciPro/json/";
-    private static final String SCIPRO_JSON_ADDRESS = "http://130.237.157.173:8080/SciPro/json/";
+    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.3:8080/SciPro/json/";
+//    private static final String SCIPRO_JSON_ADDRESS = "http://130.237.157.173:8080/SciPro/json/";
     private static final String TAG = "SciProJSON";
 
     private static SciProJSON instance;
@@ -171,6 +172,9 @@ public class SciProJSON {
         String result = getJson(uri, postParams);
 
         return result;
+    }
+
+    public void setMessageRead(PrivateMessage message) {
     }
 
     private String getJson(String uri, List<NameValuePair> postParams) {

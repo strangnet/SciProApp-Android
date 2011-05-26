@@ -38,9 +38,6 @@ import se.su.dsv.scipro.android.helpers.MenuHelper;
 import se.su.dsv.scipro.android.tasks.SendMessageAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NewMessage extends Activity implements IHeaderOnClick, SendMessageAsyncTask.SentMessageResponder {
 
     public static final String TAG = "NewMessage";
@@ -111,7 +108,11 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
     }
 
     protected boolean validInputFields() {
-        return true;
+        boolean valid = false;
+
+        valid = recipientField.getText().length() > 0 && selectedRecipient != null;
+
+        return valid;
     }
 
     private void setUpViews() {
@@ -172,7 +173,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
                             selectedRecipient)
                             .execute();
                 } else {
-
+                    Toast.makeText(NewMessage.this, "The message must have a valid recipient.", Toast.LENGTH_LONG).show();
                 }
             }
         });

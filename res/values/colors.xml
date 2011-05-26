@@ -37,4 +37,7 @@
 	<color name="background_default">#ffc3d1e2</color>
 	<color name="background_alt">#ffd7e0eb</color>
     <color name="white">#ffffffff</color>
+    <color name="project_status_list_bg_red">#ffffb5b5</color>
+    <color name="project_status_list_bg_yellow">#ffffffb5</color>
+    <color name="project_status_list_bg_green">#ffb5ffb5</color>
 </resources>

@@ -17,48 +17,80 @@
 package se.su.dsv.scipro.android.activity;
 
 import android.app.ListActivity;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import se.su.dsv.scipro.android.IHeaderOnClick;
+import se.su.dsv.scipro.android.Preferences;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.SciProApplication;
 import se.su.dsv.scipro.android.adapters.ProjectListAdapter;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
-import se.su.dsv.scipro.android.services.LocationService;
+import se.su.dsv.scipro.android.location.LocationIntentReceiver;
 import se.su.dsv.scipro.android.tasks.GetProjectsAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
-public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetProjectsAsyncTask.ProjectsResponder {
+public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetProjectsAsyncTask.ProjectsResponder, SharedPreferences.OnSharedPreferenceChangeListener {
     
     private static final int SHOW_PROJECT = 1;
     private static final String TAG = "SupervisorHome";
+
+    private static final double DSV_LONGITUDE = 17.94446;
+    private static final double DSV_LATITUDE = 59.40540;
+
+    private static final int MINIMUM_LOCATION_UPDATE_TIME = 60000;
+    private static final float MINIMUM_LOCATION_UPDATE_DISTANCE = 5f;
+
+    private static final String PROXIMITY_ALERT = "se.su.dsv.scipro.android.ProximityAlert";
+
+    private static final float PROXIMITY_RADIUS = 200f;
+    private static final long NO_EXPIRATION_TIME = -1;
     
     private ProjectListAdapter adapter;
     private ProgressDialog projectRetrievalInProgress;
-    
+
+    private LocationManager locationManager;
+    private PendingIntent pendingLocationIntent;
+    private LocationIntentReceiver locationIntentReceiver;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        PreferenceManager.getDefaultSharedPreferences(getBaseContext()).registerOnSharedPreferenceChangeListener(this);
+
         setContentView(R.layout.activity_supervisor_home);
         
         setUpViews();
-//        adapter = new ProjectListAdapter(DummyData.getInstance().getProjects());
-//        setListAdapter(adapter);
+
         if (SciProApplication.getInstance().getProjects().size() == 0) {
             new GetProjectsAsyncTask(this).execute();
         } else {
             initListAdapter();
         }
+
+
+        if (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean(Preferences.PREF_LOCATION, false)) {
+            initProximityAlert();
+        }
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -66,7 +98,11 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
             Intent intent = new Intent(this, Authenticate.class);
             startActivity(intent);
         }
-        startService(new Intent(this, LocationService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -76,6 +112,8 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         intent.putExtra("project", adapter.getItem(position));
         startActivityForResult(intent, SHOW_PROJECT);
     }
+
+
 
     public void initListAdapter() {
         adapter = new ProjectListAdapter(SciProApplication.getInstance().getProjects());
@@ -119,4 +157,75 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         SciProApplication.getInstance().setProjects(result.projects);
         initListAdapter();
     }
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (!sharedPreferences.getBoolean(Preferences.PREF_LOCATION, false)) {
+            removeProximityAlert();
+        } else {
+            initProximityAlert();
+        }
+    }
+
+    private void initProximityAlert() {
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setSpeedRequired(false);
+        criteria.setCostAllowed(true);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        locationManager.requestLocationUpdates(
+                provider,
+                MINIMUM_LOCATION_UPDATE_TIME,
+                MINIMUM_LOCATION_UPDATE_DISTANCE,
+                new MyLocationListener());
+
+        setProximityAlert();
+
+        Toast.makeText(this, "The Proximity Alert Service was initialized.", Toast.LENGTH_LONG).show();
+    }
+
+    private void setProximityAlert() {
+        Intent intent = new Intent(PROXIMITY_ALERT);
+        pendingLocationIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        locationIntentReceiver = new LocationIntentReceiver();
+
+        locationManager.addProximityAlert(
+                DSV_LATITUDE,
+                DSV_LONGITUDE,
+                PROXIMITY_RADIUS,
+                NO_EXPIRATION_TIME,
+                pendingLocationIntent);
+
+        IntentFilter filter = new IntentFilter(PROXIMITY_ALERT);
+        registerReceiver(locationIntentReceiver, filter);
+    }
+
+    private void removeProximityAlert() {
+        locationManager.removeProximityAlert(pendingLocationIntent);
+        unregisterReceiver(locationIntentReceiver);
+
+        Toast.makeText(this, "The Proximity Alert Service was shut down.", Toast.LENGTH_LONG).show();
+    }
+
+private class MyLocationListener implements LocationListener {
+        public void onLocationChanged(Location location) {
+        }
+
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        public void onProviderEnabled(String s) {
+        }
+
+        public void onProviderDisabled(String s) {
+        }
+    }
+
+
 }
