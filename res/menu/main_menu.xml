@@ -6,6 +6,10 @@
             android:id="@+id/preferences_menu_item"
             android:icon="@drawable/ic_menu_settings"/>
     <item
+    		android:title="Check-in"
+    		android:id="@+id/checkin_menu_item"
+    		android:icon="@drawable/ic_menu_location" />
+   	<item
             android:title="Logout"
             android:id="@+id/logout_menu_item"
             android:icon="@drawable/ic_menu_logout"/>

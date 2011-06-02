@@ -23,6 +23,7 @@ import se.su.dsv.scipro.android.Preferences;
 import se.su.dsv.scipro.android.R;
 import se.su.dsv.scipro.android.SciProApplication;
 import se.su.dsv.scipro.android.activity.MainActivity;
+import se.su.dsv.scipro.android.activity.StatusCheckIn;
 
 /**
  * User: patrick
@@ -39,6 +40,10 @@ public class MenuHelper {
             case R.id.logout_menu_item:
                 SciProApplication.getInstance().logout();
                 intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                return true;
+            case R.id.checkin_menu_item:
+                intent = new Intent(context, StatusCheckIn.class);
                 context.startActivity(intent);
                 return true;
         }

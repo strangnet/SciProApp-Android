@@ -64,16 +64,13 @@ public class ProjectListAdapter extends BaseAdapter {
         switch (project.status) {
         case NEEDHELP:
             status.setImageResource(R.drawable.red_ball_medium);
-            item.setBackgroundColor(R.color.project_status_list_bg_red);
             break;
         case FINE:
             status.setImageResource(R.drawable.green_ball_medium);
-            item.setBackgroundColor(R.color.project_status_list_bg_green);
             break;
         case NEUTRAL:
         default:
             status.setImageResource(R.drawable.yellow_ball_medium);
-            item.setBackgroundColor(R.color.project_status_list_bg_yellow);
         }
         //status.setAdjustViewBounds(true);
         

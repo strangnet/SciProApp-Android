@@ -9,16 +9,16 @@
 		android:key="PREF_APIKEY"
 		android:title="API-key"
 		android:summary="The API-key generated on the SciPro site" />
-	<PreferenceCategory
+	<!-- <PreferenceCategory
 		android:title="Push notification" />
 	<CheckBoxPreference
 		android:key="PREF_PUSH"
 		android:title="Push notifications"
-		android:summary="Sets if push notifications are enabled." />
+		android:summary="Sets if push notifications are enabled." />-->
 	<PreferenceCategory
 		android:title="Location Services" />
 	<CheckBoxPreference
 		android:key="PREF_LOCATION"
 		android:title="Location Services"
-		android:summary="Enables you to use the check-in feature when you arrive at work." />
+		android:summary="Enables you to use the check-in feature when you arrive at DSV." />
 </PreferenceScreen>

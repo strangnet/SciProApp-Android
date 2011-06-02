@@ -18,17 +18,38 @@ package se.su.dsv.scipro.android.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.utils.SciProUtils;
 
 /**
  * User: patrick
  * Date: 2011-05-23
  * Time: 11:46
  */
-public class StatusCheckIn extends Activity {
+public class StatusCheckIn extends Activity implements IHeaderOnClick {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_status_checkin);
+        
+        setUpViews();
+      
     }
+
+    private void setUpViews() {
+        ImageButton homeButton = (ImageButton) findViewById(R.id.header_home_btn);
+        homeButton.setVisibility(View.VISIBLE);
+    }
+
+    public void onHeaderHomeClick(View v) {
+        SciProUtils.openHomeActivity(this);
+    }
+
+    public void onHeaderMessagesClick(View v) {
+        SciProUtils.openMessagesActivity(this);
+    }
+
 }

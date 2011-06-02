@@ -71,8 +71,7 @@ public class MessageListAdapter extends BaseAdapter {
                 SciProJSON.getInstance().setMessageRead(message);
             }
         }.start();
-        Toast toast = Toast.makeText(context, "Message marked as read", Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(context, "Message marked as read", Toast.LENGTH_SHORT).show();
         notifyDataSetChanged();
     }
 

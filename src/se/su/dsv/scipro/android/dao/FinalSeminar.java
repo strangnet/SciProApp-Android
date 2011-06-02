@@ -16,6 +16,7 @@
 
 package se.su.dsv.scipro.android.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ import java.util.List;
  * Date: 2011-05-22
  * Time: 15:36
  */
-public class FinalSeminar {
+public class FinalSeminar implements Serializable {
     public String room;
     public String date;
     public List<User> activeListeners;
@@ -34,5 +35,9 @@ public class FinalSeminar {
         this.date = date;
         this.activeListeners = activeListeners;
         this.opponents = opponents;
+    }
+    
+    public String toString() {
+        return date + " in room " + room;
     }
 }

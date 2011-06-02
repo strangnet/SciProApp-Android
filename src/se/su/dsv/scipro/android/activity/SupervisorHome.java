@@ -29,6 +29,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
     private static final double DSV_LONGITUDE = 17.94446;
     private static final double DSV_LATITUDE = 59.40540;
+    private static final double HOME_LONGITUDE = 59.19032;
+    private static final double HOME_LATITUDE = 17.81658;
 
     private static final int MINIMUM_LOCATION_UPDATE_TIME = 60000;
     private static final float MINIMUM_LOCATION_UPDATE_DISTANCE = 5f;
@@ -68,6 +71,8 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
     private LocationManager locationManager;
     private PendingIntent pendingLocationIntent;
     private LocationIntentReceiver locationIntentReceiver;
+    private String provider;
+    private static boolean proximityAlertSet = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,14 +84,16 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         
         setUpViews();
 
-        if (SciProApplication.getInstance().getProjects().size() == 0) {
-            new GetProjectsAsyncTask(this).execute();
-        } else {
-            initListAdapter();
-        }
+//        if (SciProApplication.getInstance().getProjects().size() == 0) {
+//            new GetProjectsAsyncTask(this).execute();
+//        } else {
+//            initListAdapter();
+//        }
 
+        new GetProjectsAsyncTask(this).execute();
 
-        if (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean(Preferences.PREF_LOCATION, false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean(Preferences.PREF_LOCATION, false)
+                && !proximityAlertSet) {
             initProximityAlert();
         }
     }
@@ -94,10 +101,10 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
     @Override
     protected void onResume() {
         super.onResume();
-        if (!SciProApplication.getInstance().isAuthenticated()) {
-            Intent intent = new Intent(this, Authenticate.class);
-            startActivity(intent);
-        }
+//        if (!SciProApplication.getInstance().isAuthenticated()) {
+//            Intent intent = new Intent(this, Authenticate.class);
+//            startActivity(intent);
+//        }
     }
 
     @Override
@@ -177,7 +184,7 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        String provider = locationManager.getBestProvider(criteria, true);
+        provider = locationManager.getBestProvider(criteria, true);
 
         locationManager.requestLocationUpdates(
                 provider,
@@ -204,20 +211,25 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
         IntentFilter filter = new IntentFilter(PROXIMITY_ALERT);
         registerReceiver(locationIntentReceiver, filter);
+        proximityAlertSet = true;
     }
 
     private void removeProximityAlert() {
-        locationManager.removeProximityAlert(pendingLocationIntent);
+        if (pendingLocationIntent != null) {
+            locationManager.removeProximityAlert(pendingLocationIntent);
+        }
         unregisterReceiver(locationIntentReceiver);
-
+        proximityAlertSet = false;
         Toast.makeText(this, "The Proximity Alert Service was shut down.", Toast.LENGTH_LONG).show();
     }
 
 private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
+            Log.d(TAG, "Location Changed: " + location);
         }
 
         public void onStatusChanged(String s, int i, Bundle bundle) {
+            Log.d(TAG, "Location Changed: " + s + " " + i);
         }
 
         public void onProviderEnabled(String s) {
