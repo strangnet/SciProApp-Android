@@ -18,7 +18,6 @@ package se.su.dsv.scipro.android.activity;
 
 import android.app.ListActivity;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -56,8 +55,6 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
     private static final double DSV_LONGITUDE = 17.94446;
     private static final double DSV_LATITUDE = 59.40540;
-    private static final double HOME_LONGITUDE = 59.19032;
-    private static final double HOME_LATITUDE = 17.81658;
 
     private static final int MINIMUM_LOCATION_UPDATE_TIME = 60000;
     private static final float MINIMUM_LOCATION_UPDATE_DISTANCE = 5f;
@@ -86,11 +83,11 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
         
         setUpViews();
 
-//        if (SciProApplication.getInstance().getProjects().size() == 0) {
-//            new GetProjectsAsyncTask(this).execute();
-//        } else {
-//            initListAdapter();
-//        }
+        if (SciProApplication.getInstance().getProjects().size() == 0) {
+            new GetProjectsAsyncTask(this).execute();
+        } else {
+            initListAdapter();
+        }
 
         new GetProjectsAsyncTask(this).execute();
 
@@ -98,32 +95,8 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
                 && !proximityAlertSet) {
             initProximityAlert();
         }
-        
-        bleh();
     }
 
-    private void bleh() {
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, StatusCheckIn.class), 0);
-
-        Notification notification = createNotification();
-
-        String notificationTitle = "";
-        String notificationText = "";
-
-        notificationTitle = "Entering DSV";
-        notificationText = "You are entering the proximity of DSV. Click to change your SciPro status.";
-        
-        notification.setLatestEventInfo(this,
-                notificationTitle,
-                notificationText,
-                pendingIntent);
-
-        NotificationManager notificationManager =
-            (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        
-        notificationManager.notify(4711, notification);
-    }
-    
     private Notification createNotification() {
         Notification notification = new Notification();
 
@@ -206,9 +179,9 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (!sharedPreferences.getBoolean(Preferences.PREF_LOCATION, false)) {
-            //removeProximityAlert();
+            removeProximityAlert();
         } else {
-            //initProximityAlert();
+            initProximityAlert();
         }
     }
 

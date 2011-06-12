@@ -17,11 +17,16 @@
 package se.su.dsv.scipro.android.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import se.su.dsv.scipro.android.IHeaderOnClick;
 import se.su.dsv.scipro.android.R;
+import se.su.dsv.scipro.android.tasks.SetStatusAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
 /**
@@ -29,19 +34,36 @@ import se.su.dsv.scipro.android.utils.SciProUtils;
  * Date: 2011-05-23
  * Time: 11:46
  */
-public class StatusCheckIn extends Activity implements IHeaderOnClick {
+public class StatusCheckIn extends Activity implements IHeaderOnClick, SetStatusAsyncTask.StatusResponder {
+
+    public static final String TAG = "StatusCheckIn";
+
+    private ProgressDialog checkinProgress;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_status_checkin);
-        
+
         setUpViews();
-      
+
     }
 
     private void setUpViews() {
         ImageButton homeButton = (ImageButton) findViewById(R.id.header_home_btn);
         homeButton.setVisibility(View.VISIBLE);
+
+
+        Button checkinButton = (Button) findViewById(R.id.checkin_button);
+        checkinButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) findViewById(R.id.checkin_checkbox);
+                EditText checkinStatus = (EditText) findViewById(R.id.checkin_status_text);
+                new SetStatusAsyncTask(StatusCheckIn.this,
+                                       checkBox.isChecked(),
+                                       checkinStatus.getText().toString()).execute();
+            }
+        });
     }
 
     public void onHeaderHomeClick(View v) {
@@ -52,4 +74,14 @@ public class StatusCheckIn extends Activity implements IHeaderOnClick {
         SciProUtils.openMessagesActivity(this);
     }
 
+    public void checkingIn() {
+        checkinProgress = ProgressDialog.show(this,
+                "Setting status",
+                "Setting current check-in status and status message.");
+    }
+
+    public void checkedIn(SetStatusAsyncTask.StatusResult result) {
+        checkinProgress.dismiss();
+        finish();
+    }
 }

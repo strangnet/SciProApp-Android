@@ -50,7 +50,7 @@ public class PrivateMessageView extends Activity implements IHeaderOnClick, SetM
         message = (PrivateMessage) bundle.getSerializable("message");
         setContentView(R.layout.activity_message);
 
-        new SetMessageReadAsyncTask(this).execute();
+        new SetMessageReadAsyncTask(this, message).execute();
         
         setUpViews();
     }
