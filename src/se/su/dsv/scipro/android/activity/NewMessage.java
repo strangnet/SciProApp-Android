@@ -63,7 +63,9 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
         if (bundle != null) {
             if (bundle.getSerializable("message") != null) {
                 replyToMessage = (PrivateMessage) bundle.getSerializable("message");
+                selectedRecipient = replyToMessage.from;
             }
+            
         }
 
         setContentView(R.layout.activity_compose_message);
@@ -159,6 +161,7 @@ public class NewMessage extends Activity implements IHeaderOnClick, SendMessageA
 
         if (replyToMessage != null) {
             subjectField.setText("Re: " + replyToMessage.subject);
+            recipientField.setText(selectedRecipient.toString());
         }
 
         submitButton.setOnClickListener(new View.OnClickListener() {

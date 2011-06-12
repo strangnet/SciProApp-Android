@@ -17,6 +17,8 @@
 package se.su.dsv.scipro.android.activity;
 
 import android.app.ListActivity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -96,6 +98,43 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
                 && !proximityAlertSet) {
             initProximityAlert();
         }
+        
+        bleh();
+    }
+
+    private void bleh() {
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, StatusCheckIn.class), 0);
+
+        Notification notification = createNotification();
+
+        String notificationTitle = "";
+        String notificationText = "";
+
+        notificationTitle = "Entering DSV";
+        notificationText = "You are entering the proximity of DSV. Click to change your SciPro status.";
+        
+        notification.setLatestEventInfo(this,
+                notificationTitle,
+                notificationText,
+                pendingIntent);
+
+        NotificationManager notificationManager =
+            (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        
+        notificationManager.notify(4711, notification);
+    }
+    
+    private Notification createNotification() {
+        Notification notification = new Notification();
+
+        notification.icon = R.drawable.ic_stat_location;
+        notification.when = System.currentTimeMillis();
+
+        notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        return notification;
     }
 
     @Override
@@ -167,9 +206,9 @@ public class SupervisorHome extends ListActivity implements IHeaderOnClick, GetP
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (!sharedPreferences.getBoolean(Preferences.PREF_LOCATION, false)) {
-            removeProximityAlert();
+            //removeProximityAlert();
         } else {
-            initProximityAlert();
+            //initProximityAlert();
         }
     }
 

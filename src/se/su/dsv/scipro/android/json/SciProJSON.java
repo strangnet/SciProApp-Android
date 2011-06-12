@@ -46,12 +46,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SciProJSON {
-    
-    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.2:8080/SciPro/json/";
-//    private static final String SCIPRO_JSON_ADDRESS = "http://130.237.157.173:8080/SciPro/json/";
+
+    //    private static final String SCIPRO_JSON_ADDRESS = "http://192.168.1.2:8080/SciPro/json/";
+    private static final String SCIPRO_JSON_ADDRESS = "http://130.229.148.243:8080/SciPro/json/";
     private static final String TAG = "SciProJSON";
 
     private static SciProJSON instance;
+
     public static SciProJSON getInstance() {
         if (instance == null) {
             instance = new SciProJSON();
@@ -60,19 +61,19 @@ public class SciProJSON {
     }
 
     private DefaultHttpClient httpClient;
-    
+
     private SciProJSON() {
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(params, 5000);
-        HttpConnectionParams.setSoTimeout(params, 5000); 
+        HttpConnectionParams.setSoTimeout(params, 5000);
         httpClient = new DefaultHttpClient(params);
         BasicCookieStore cookieStore = new BasicCookieStore();
         httpClient.setCookieStore(cookieStore);
     }
-    
+
     public String getProjects() {
         String uri = SCIPRO_JSON_ADDRESS + "project";
-        
+
         List<NameValuePair> postParams = new ArrayList<NameValuePair>();
         postParams.add(new BasicNameValuePair("userid", String.valueOf(SciProApplication.getInstance().getUserId())));
         postParams.add(new BasicNameValuePair("apikey", SciProApplication.getInstance().getApiKey()));
@@ -113,16 +114,16 @@ public class SciProJSON {
 
     public String jsonAuth(String username, String apikey) {
         String uri = SCIPRO_JSON_ADDRESS + "auth";
-        
+
         JSONObject jsonObj = new JSONObject();
-        
+
         try {
             jsonObj.put("username", username);
             jsonObj.put("apikey", apikey);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException: " + e);
         }
-        
+
         List<NameValuePair> postParams = new ArrayList<NameValuePair>();
         postParams.add(new BasicNameValuePair("json", jsonObj.toString()));
 
@@ -175,13 +176,48 @@ public class SciProJSON {
     }
 
     public String setMessageRead(PrivateMessage message) {
-        String result = "";
+        String uri = SCIPRO_JSON_ADDRESS + "message/read";
+
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("userid", String.valueOf(SciProApplication.getInstance().getUserId()));
+            jsonObj.put("apikey", SciProApplication.getInstance().getApiKey());
+            jsonObj.put("id", message.id);
+        } catch (JSONException e) {
+            Log.e(TAG, "JSONException: " + e);
+        }
+
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("json", jsonObj.toString()));
+
+        String result = getJson(uri, postParams);
+
+        Log.d(TAG, "jsonAuth: " + result);
 
         return result;
     }
 
     public String setCheckinStatus(boolean checkedIn, String status) {
-        String result = "";
+        String uri = SCIPRO_JSON_ADDRESS + "status";
+
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("userid", String.valueOf(SciProApplication.getInstance().getUserId()));
+            jsonObj.put("apikey", SciProApplication.getInstance().getApiKey());
+            jsonObj.put("available", checkedIn);
+            jsonObj.put("status", status);
+        } catch (JSONException e) {
+            Log.e(TAG, "JSONException: " + e);
+        }
+
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("json", jsonObj.toString()));
+
+        String result = getJson(uri, postParams);
+
+        Log.d(TAG, "jsonAuth: " + result);
 
         return result;
     }

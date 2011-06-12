@@ -30,9 +30,10 @@ import se.su.dsv.scipro.android.dao.PrivateMessage;
 import android.os.Bundle;
 import android.widget.TextView;
 import se.su.dsv.scipro.android.helpers.MenuHelper;
+import se.su.dsv.scipro.android.tasks.SetMessageReadAsyncTask;
 import se.su.dsv.scipro.android.utils.SciProUtils;
 
-public class PrivateMessageView extends Activity implements IHeaderOnClick {
+public class PrivateMessageView extends Activity implements IHeaderOnClick, SetMessageReadAsyncTask.MessageReadResponder {
 
     private static final int REPLY_MESSAGE = 3;
 
@@ -48,6 +49,8 @@ public class PrivateMessageView extends Activity implements IHeaderOnClick {
         Bundle bundle = getIntent().getExtras();
         message = (PrivateMessage) bundle.getSerializable("message");
         setContentView(R.layout.activity_message);
+
+        new SetMessageReadAsyncTask(this).execute();
         
         setUpViews();
     }
@@ -92,5 +95,13 @@ public class PrivateMessageView extends Activity implements IHeaderOnClick {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return MenuHelper.openActivityFromMenuItem(this, item);
+    }
+
+    public void settingStatus() {
+
+    }
+
+    public void statusIsSet(SetMessageReadAsyncTask.MessageReadResult result) {
+        message.read = result.read;
     }
 }
